@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+ xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:converters="using:LXLibrary.Converters"
+    xmlns:ioc="clr-namespace:Prism.Ioc;assembly=Prism.Forms"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    Title="Advocates"
+    ios:Page.UseSafeArea="true"
+    ios:Page.LargeTitleDisplay="Always"
+    x:Name="advocatesPage"
+    x:Class="Advocates.Views.AdvocatesPage" xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations">
+    
+<ContentPage.Content>
+        <ListView 
+            AutomationId="advocatesListView"
+            ItemsSource="{Binding Filtered}" 
+            BackgroundColor="Transparent" 
+            HasUnevenRows="true"
+            RowHeight="80"
+            SeparatorVisibility="Default"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+            RefreshCommand="{Binding RefreshCommand}">
+            
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                                  EventArgsParameterPath="Item"
+                                                  Command="{Binding BindingContext.AdvocateSelectedCommand,
+                                                  Source={x:Reference advocatesPage}}" />
+            </ListView.Behaviors>
+        
+        <ListView.Header>
+            <Grid BackgroundColor="{DynamicResource BackgroundColorDark}">
+                <SearchBar 
+                    x:Name="searchBar"
+                    AutomationId="searchBar"
+                    Style="{StaticResource SearchBarStyle}"
+                    SearchCommand="{Binding SearchCommand}"
+                    Text="{Binding SearchText}"
+                    IsSpellCheckEnabled="false"
+                    Placeholder="Search">
+                        <SearchBar.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                  Command="{Binding BindingContext.SearchCommand,
+                                                  Source={x:Reference advocatesPage}}" />
+                        </SearchBar.Behaviors>
+                </SearchBar>
+            </Grid>
+        </ListView.Header>
+        
+        <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid 
+                            BackgroundColor="{StaticResource BackgroundColorItem}"
+                            ColumnSpacing="0">
+                            
+                            <Grid.RowDefinitions>                                
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                                <ffimageloading:CachedImage
+                                    Margin="10"
+                                    CacheType="Disk"
+                                    Aspect="AspectFit" 
+                                    HeightRequest="80" 
+                                    WidthRequest="80" 
+                                    Source="{Binding AvatarUrl}">
+                                    <ffimageloading:CachedImage.Transformations>
+                                        <fftransformations:RoundedTransformation Radius="30"/>
+                                    </ffimageloading:CachedImage.Transformations>
+                                </ffimageloading:CachedImage>
+                            
+
+                            <StackLayout 
+                                Grid.Column="1"
+                                Spacing="0"
+                                VerticalOptions="Center"
+                                Padding="12,14">
+                                
+                                <Label 
+                                    x:Name="lblName"
+                                    AutomationId="lblName"
+                                    Margin="0,6,0,0"
+                                    VerticalTextAlignment="Center"
+                                    FontFamily="Poppins SemiBold"
+                                    TextColor="#2E2E2E"
+                                    FontSize="18"
+                                    Text="{Binding Name}" 
+                                    LineBreakMode="TailTruncation" />
+                            </StackLayout>
+
+                   
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+    </ListView>
+        
+    </ContentPage.Content>
+    
+</ContentPage>
