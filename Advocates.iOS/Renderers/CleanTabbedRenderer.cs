@@ -20,8 +20,15 @@ namespace Advocates.iOS.Renderers
             TabBar.BackgroundImage = new UIImage();
             TabBar.ShadowImage = new UIImage();
 
-            UITabBar.Appearance.BackgroundColor = ((Color)formsApp.Resources["AccentColor"]).ToUIColor();
-            UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes() { Font = UIFont.FromName("Avenir-Medium", 12), TextColor = UIColor.White }, UIControlState.Normal);
+            var tabColor = Color.FromHex("#F6F6F6");
+            var defaultTabItemColor = Color.FromHex("#CDCDCD");
+
+            UITabBar.Appearance.BackgroundColor = tabColor.ToUIColor();
+            UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes() { Font = UIFont.FromName("Poppins SemiBold", 12), TextColor = defaultTabItemColor.ToUIColor() }, UIControlState.Normal);
+            UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes() { Font = UIFont.FromName("Poppins SemiBold", 12), TextColor = ((Color)formsApp.Resources["AccentColor"]).ToUIColor()}, UIControlState.Selected);
+            UITabBar.Appearance.BarTintColor = tabColor.ToUIColor();
+            UITabBar.Appearance.TintColor = tabColor.ToUIColor();
+
         }
 
     }

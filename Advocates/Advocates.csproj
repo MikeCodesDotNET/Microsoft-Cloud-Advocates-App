@@ -39,4 +39,13 @@
     <Folder Include="Helpers\" />
     <Folder Include="Converters\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\RssFeedPageTablet.xaml.cs">
+      <DependentUpon>RssFeedPageTablet.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\AdvocatePage %28copy%29.xaml.cs">
+      <DependentUpon>AdvocatePageTablet.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

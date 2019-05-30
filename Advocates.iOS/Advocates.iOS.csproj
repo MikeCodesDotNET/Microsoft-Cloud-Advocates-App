@@ -52,6 +52,7 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignProvision>Advocates Dev Profile</CodesignProvision>
+    <MtouchFastDev>true</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -222,5 +223,29 @@
     <BundleResource Include="Resources\Toronto.png" />
     <BundleResource Include="Resources\Washington-DC.png" />
     <BundleResource Include="Resources\bit-azure.png" />
+    <BundleResource Include="Resources\Tabbar_Advocates_Selected.png" />
+    <BundleResource Include="Resources\Tabbar_Advocates_Selected%402x.png" />
+    <BundleResource Include="Resources\Tabbar_Advocates_Selected%403x.png" />
+    <BundleResource Include="Resources\Tabbar_Advocates.png" />
+    <BundleResource Include="Resources\Tabbar_Advocates%402x.png" />
+    <BundleResource Include="Resources\Tabbar_Advocates%403x.png" />
+    <BundleResource Include="Resources\Tabbar_Me_Selected.png" />
+    <BundleResource Include="Resources\Tabbar_Me_Selected%402x.png" />
+    <BundleResource Include="Resources\Tabbar_Me_Selected%403x.png" />
+    <BundleResource Include="Resources\Tabbar_Me.png" />
+    <BundleResource Include="Resources\Tabbar_Me%402x.png" />
+    <BundleResource Include="Resources\Tabbar_Me%403x.png" />
+    <BundleResource Include="Resources\Tabbar_RSS_Selected.png" />
+    <BundleResource Include="Resources\Tabbar_RSS_Selected%402x.png" />
+    <BundleResource Include="Resources\Tabbar_RSS_Selected%403x.png" />
+    <BundleResource Include="Resources\Tabbar_RSS.png" />
+    <BundleResource Include="Resources\Tabbar_RSS%402x.png" />
+    <BundleResource Include="Resources\Tabbar_RSS%403x.png" />
+    <BundleResource Include="Resources\Search_Blue.png" />
+    <BundleResource Include="Resources\Search_Blue%402x.png" />
+    <BundleResource Include="Resources\Search_Blue%403x.png" />
+    <BundleResource Include="Resources\Search.png" />
+    <BundleResource Include="Resources\Search%402x.png" />
+    <BundleResource Include="Resources\Search%403x.png" />
   </ItemGroup>
 </Project>

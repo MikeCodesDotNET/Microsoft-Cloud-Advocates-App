@@ -21,6 +21,13 @@ namespace Advocates.Models
         [JsonProperty("url")]
         public Uri Url { get; set; }
 
+        [JsonProperty("summary")]
+        public string Summary { get; set; }
+
+
+        [JsonProperty("publishedDate")]
+        public DateTime PublishedDate { get; set; }
+
 
     }
 

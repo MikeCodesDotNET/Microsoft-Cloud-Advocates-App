@@ -7,6 +7,7 @@
     xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
     xmlns:controls="clr-namespace:Advocates.Controls"
     Title="Sign In"
+        IconImageSource="Tabbar_Me.png"
     x:Class="Advocates.Views.SignInPage">
     <ContentPage.Content>
         <StackLayout>

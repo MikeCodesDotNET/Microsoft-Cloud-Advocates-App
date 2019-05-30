@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace Advocates.Views
 {
-    public partial class RssFeedPage : ContentPage
+    public partial class RssFeedPageTablet : ContentPage
     {
-        public RssFeedPage()
+        public RssFeedPageTablet()
         {
             InitializeComponent();
         }

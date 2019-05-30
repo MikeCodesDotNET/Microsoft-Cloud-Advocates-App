@@ -12,8 +12,6 @@ namespace Advocates.ViewModels
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-
-
         }
 
         INavigationService navigationService;

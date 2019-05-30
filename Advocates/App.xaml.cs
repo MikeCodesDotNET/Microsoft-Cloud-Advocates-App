@@ -21,6 +21,7 @@ using Advocates.Views;
 using Advocates.Controls;
 using Advocates.Services;
 using Plugin.DeviceInfo.Abstractions;
+using Advocates.ViewModels;
 
 namespace Advocates
 {
@@ -34,16 +35,13 @@ namespace Advocates
             InitializeComponent();
 
             //Init App Center Data!  
-            AppCenter.Start("454c6c59-d915-4505-ba3f-4ff657fd8822",
+            AppCenter.Start(Helpers.Constants.AppCenterApiKey,
                     typeof(Data), typeof(Analytics), typeof(Crashes), typeof(Push), typeof(Distribute), typeof(Auth));
 
             INavigationResult result; 
 
-            if (Xamarin.Essentials.DeviceInfo.Idiom == Xamarin.Essentials.DeviceIdiom.Phone)
-                result = await NavigationService.NavigateAsync($"TabbedPage?{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|RssFeedPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|AdvocatesPage&{KnownNavigationParameters.CreateTab}=NavigationPage|SignInPage");
-            else
-                result = await NavigationService.NavigateAsync($"TabbedPage?{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|RssFeedPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|AdvocatesPage&{KnownNavigationParameters.CreateTab}=NavigationPage|SignInPage");
-
+            result = await NavigationService.NavigateAsync($"TabbedPage?{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|RssFeedPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|AdvocatesPage&{KnownNavigationParameters.CreateTab}=NavigationPage|SignInPage");
+      
 
 
             if (!result.Success)
@@ -70,8 +68,15 @@ namespace Advocates
             containerRegistry.RegisterForNavigation<NavigationPage>();
 
             containerRegistry.RegisterForNavigation<AdvocatesPage>();
-            containerRegistry.RegisterForNavigation<AdvocatePage>();
-            containerRegistry.RegisterForNavigation<RssFeedPage>();
+
+            containerRegistry.RegisterForNavigationOnIdiom<AdvocatePage, AdvocatePageViewModel>(desktopView: typeof(AdvocatePage),
+                                                                       tabletView: typeof(AdvocatePageTablet));
+                
+            containerRegistry.RegisterForNavigationOnIdiom<RssFeedPage, RssFeedPageViewModel>(desktopView: typeof(RssFeedPage),
+                                                                            tabletView: typeof(RssFeedPageTablet));
+
+
+
             containerRegistry.RegisterForNavigation<FavouritesPage>();
             containerRegistry.RegisterForNavigation<SignInPage>();
         }

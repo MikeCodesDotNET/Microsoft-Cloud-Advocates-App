@@ -12,6 +12,7 @@ namespace Advocates.ViewModels
 {
     public class AdvocatesPageViewModel : ViewModelBase
     {
+        public string IconName = "Tabbar_Advocates.png";
         //Properties 
         public ObservableRangeCollection<Advocate> Filtered
         {
@@ -42,10 +43,14 @@ namespace Advocates.ViewModels
         public AdvocatesPageViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService;
+            filtered = new ObservableRangeCollection<Advocate>();
+            Filtered = new ObservableRangeCollection<Advocate>();
 
             AdvocateSelectedCommand = new DelegateCommand<Advocate>(AdvocateSelected);
             RefreshCommand = new DelegateCommand(Refresh);
             SearchCommand = new DelegateCommand(Search);
+
+            Refresh();
         }
 
 
@@ -82,6 +87,7 @@ namespace Advocates.ViewModels
 
         private async Task RefreshData(bool backgroundRefresh, bool force)
         {
+           
             IsRefreshing = !backgroundRefresh;
             var result = await Data.ListAsync<Advocate>(DefaultPartitions.AppDocuments);
             advocates = new ObservableRangeCollection<Advocate>(result.CurrentPage.Items.Select(a => a.DeserializedValue));
@@ -95,7 +101,7 @@ namespace Advocates.ViewModels
         //Overrides 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-            if (Filtered == null)
+            if(Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.Internet || Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.ConstrainedInternet)
             {
                 var result = await Data.ListAsync<Advocate>(DefaultPartitions.AppDocuments);
                 var unsorted = result.CurrentPage.Items.Select(a => a.DeserializedValue).Where(x => x.ClassType == "Advocate");
@@ -103,6 +109,7 @@ namespace Advocates.ViewModels
                 advocates = new ObservableRangeCollection<Advocate>(unsorted.OrderBy(x => x.Name));
                 Filtered = new ObservableRangeCollection<Advocate>(advocates);
             }
+
         }
 
 

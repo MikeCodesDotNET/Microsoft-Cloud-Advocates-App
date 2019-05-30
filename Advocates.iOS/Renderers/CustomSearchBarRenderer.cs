@@ -21,8 +21,7 @@ namespace Advocates.iOS.Renderers
             using (var searchKey = new NSString("_searchField"))
             {
                 var textField = (UITextField)Control.ValueForKey(searchKey);
-                textField.BackgroundColor = Color.White.ToUIColor();
-
+                textField.BackgroundColor = Color.FromHex("#F6F6F6").ToUIColor(); //Color.White.ToUIColor();
                 textField.TintColor = ((Color)formsApp.Resources["AccentColor"]).ToUIColor();
                 textField.Font = UIFont.FromName("Poppins Light", 18);
             }

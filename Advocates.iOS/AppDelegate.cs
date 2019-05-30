@@ -34,10 +34,7 @@ namespace Advocates.iOS
 
             var formsApp = new App();
             UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, false);
-            UITabBar.Appearance.BarTintColor = ((Color)formsApp.Resources["AccentColor"]).ToUIColor();
-            UITabBar.Appearance.TintColor = ((Color)formsApp.Resources["AccentColor"]).ToUIColor();
-
-
+        
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

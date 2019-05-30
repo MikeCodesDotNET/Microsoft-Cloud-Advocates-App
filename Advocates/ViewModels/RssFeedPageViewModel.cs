@@ -13,6 +13,18 @@ namespace Advocates.ViewModels
 {
     public class RssFeedPageViewModel : ViewModelBase
     {
+        public string IconName = "Tabbar_RSS.png";
+
+        bool showSearch;
+        public bool ShowSearch
+        {
+             get => showSearch;
+            set
+            {
+                SetProperty(ref showSearch, value);
+            }
+        }
+
 
         BlogPost selectedBlogPost;
         public BlogPost SelectedBlogPost
@@ -21,7 +33,8 @@ namespace Advocates.ViewModels
             set
             {
                 SetProperty(ref selectedBlogPost, value);
-                Xamarin.Essentials.Browser.OpenAsync(value.Url);
+                if(value != null)
+                    Xamarin.Essentials.Browser.OpenAsync(value.Url);
             }
         }
 
@@ -92,14 +105,9 @@ namespace Advocates.ViewModels
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             await RefreshData(true, true);
-
+            SelectedBlogPost = null;
         }
 
-
-        void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-   
-        }
 
         private async void BlogPostSelected(BlogPost selectedBlogPost)
         {

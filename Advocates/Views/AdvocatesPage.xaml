@@ -8,6 +8,7 @@
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="Advocates"
+    IconImageSource="Tabbar_Advocates.png"
     ios:Page.UseSafeArea="true"
     ios:Page.LargeTitleDisplay="Always"
     x:Name="advocatesPage"
@@ -33,7 +34,7 @@
             </ListView.Behaviors>
         
         <ListView.Header>
-            <Grid BackgroundColor="{DynamicResource BackgroundColorDark}">
+            <Grid>
                 <SearchBar 
                     x:Name="searchBar"
                     AutomationId="searchBar"

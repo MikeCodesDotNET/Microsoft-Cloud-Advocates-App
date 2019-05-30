@@ -10,13 +10,25 @@
     Title="Blog Posts"
     ios:Page.UseSafeArea="true"
     ios:Page.LargeTitleDisplay="Always"
-    x:Class="Advocates.Views.RssFeedPage"
-    x:Name="rssFeedPage"
+    x:Class="Advocates.Views.RssFeedPageTablet"
+    x:Name="rssFeedPageTablet"
     IconImageSource="Tabbar_RSS.png"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+       
+    <ContentPage.ToolbarItems>
+         <ToolbarItem 
+            x:Name="btnAddJob"
+            AutomationId="btnAddJob"
+            Text="Hello"
+            IconImageSource="Search_Blue.png"/>
+        </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
+        
+        
+        
         <StackLayout>
-            <Grid Margin="0,5,0,5">
+            <Grid IsVisible="{Binding ShowSearch}">
                 <SearchBar 
                     x:Name="searchBar"
                     AutomationId="searchBar"
@@ -35,14 +47,10 @@
             SelectionChanged="OnCollectionViewSelectionChanged">
   
             
-         
+          
             
             <CollectionView.ItemsLayout>
-
-                <GridItemsLayout  Orientation="Vertical" Span="2">
-                     
-                </GridItemsLayout>
-                    
+                <GridItemsLayout Orientation="Vertical" Span="4"/>
             </CollectionView.ItemsLayout>
             
             <CollectionView.ItemTemplate>
@@ -67,6 +75,7 @@
                                 Grid.Row="0"
                                 CacheType="Disk"
                                 Aspect="AspectFill" 
+                                LoadingPlaceholder="bit-azure.png"
                                 Source="{Binding PrimaryImage.ContentUrl}">
                             </ffimageloading:CachedImage>
                         
