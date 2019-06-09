@@ -20,7 +20,6 @@ using Prism.Logging;
 using Advocates.Views;
 using Advocates.Controls;
 using Advocates.Services;
-using Plugin.DeviceInfo.Abstractions;
 using Advocates.ViewModels;
 
 namespace Advocates
@@ -39,7 +38,6 @@ namespace Advocates
                     typeof(Data), typeof(Analytics), typeof(Crashes), typeof(Push), typeof(Distribute), typeof(Auth));
 
             INavigationResult result; 
-
             result = await NavigationService.NavigateAsync($"TabbedPage?{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|RssFeedPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|AdvocatesPage&{KnownNavigationParameters.CreateTab}=NavigationPage|SignInPage");
       
 

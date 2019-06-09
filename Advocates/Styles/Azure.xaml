@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -13,7 +12,7 @@
     
     <Color x:Key="TextColor">#FFFFFF</Color>
     <Color x:Key="TextColorSubtle">#777777</Color>
-    <Color x:Key="TextColorPlaceholder">#344657</Color>
+    <Color x:Key="TextColorPlaceholder">#777777</Color>
     <Color x:Key="SearchBarBackgroundColor">#0063B0</Color>
     
     <OnPlatform x:Key="EntryBackgroundColor" x:TypeArguments="Color">

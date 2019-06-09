@@ -9,24 +9,19 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="Blog Posts"
     ios:Page.UseSafeArea="true"
-    ios:Page.LargeTitleDisplay="Always"
+    ios:Page.LargeTitleDisplay="Never"
     x:Class="Advocates.Views.RssFeedPage"
     x:Name="rssFeedPage"
     IconImageSource="Tabbar_RSS.png"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" Command="{Binding SearchIconClickedCommand}" IconImageSource="Search.png">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Grid Margin="0,5,0,5">
-                <SearchBar 
-                    x:Name="searchBar"
-                    AutomationId="searchBar"
-                    Style="{StaticResource SearchBarStyle}"
-                    SearchCommand="{Binding SearchCommand}"
-                    Text="{Binding SearchText}"
-                    IsSpellCheckEnabled="false"
-                    Placeholder="Search">
-                </SearchBar>
-            </Grid>
+       
         <CollectionView
             x:Name="blogCollectionView"
             ItemsSource="{Binding Filtered}"
@@ -39,7 +34,7 @@
             
             <CollectionView.ItemsLayout>
 
-                <GridItemsLayout  Orientation="Vertical" Span="2">
+                <GridItemsLayout  Orientation="Vertical" Span="1">
                      
                 </GridItemsLayout>
                     
@@ -51,7 +46,7 @@
                         <pancake:PancakeView
                             BackgroundColor="#F0F0F0"
                             CornerRadius="15" 
-                            Margin="15"
+                            Margin="15, 5, 15, 5"
                             HeightRequest="250"
                             IsClippedToBounds="true" 
                             HorizontalOptions="FillAndExpand">
@@ -96,75 +91,6 @@
             </CollectionView.ItemTemplate>
           
         </CollectionView>
-        </StackLayout>
-        <!--
-          <ListView 
-            ItemsSource="{Binding Filtered}" 
-            BackgroundColor="Transparent" 
-            HasUnevenRows="true"
-            RowHeight="80"
-            SeparatorVisibility="Default"
-            IsPullToRefreshEnabled="True"
-            IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-            RefreshCommand="{Binding RefreshCommand}">
-            
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid 
-                            BackgroundColor="{StaticResource BackgroundColorItem}"
-                            ColumnSpacing="0">
-                            
-                            <Grid.RowDefinitions>                                
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            
-                                <ffimageloading:CachedImage
-                                    Margin="10"
-                                    CacheType="Disk"
-                                    Aspect="AspectFit" 
-                                    HeightRequest="80" 
-                                    WidthRequest="80" 
-                                    Source="{Binding MetaInformation.ImageUrl}">
-                                    <ffimageloading:CachedImage.Transformations>
-                                        <fftransformations:RoundedTransformation Radius="30"/>
-                                    </ffimageloading:CachedImage.Transformations>
-                                </ffimageloading:CachedImage>
-                            
-
-                            <StackLayout 
-                                Grid.Column="1"
-                                Spacing="0"
-                                VerticalOptions="Center"
-                                Padding="12,14">
-                                
-                                <Label 
-                                    x:Name="lblName"
-                                    AutomationId="lblName"
-                                    Margin="0,6,0,0"
-                                    VerticalTextAlignment="Center"
-                                    FontFamily="Poppins SemiBold"
-                                    TextColor="#2E2E2E"
-                                    FontSize="18"
-                                    Text="{Binding RssItem.Title}" 
-                                    LineBreakMode="TailTruncation" />
-                            </StackLayout>
-
-                   
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-         
-            
-            </ListView>
-        
-        --> 
-        
+  
     </ContentPage.Content>
 </ContentPage>

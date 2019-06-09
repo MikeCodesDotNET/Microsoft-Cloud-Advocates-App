@@ -13,9 +13,8 @@ namespace Advocates.ViewModels
         public DelegateCommand SignInClickedCommand { get; set; }
 
 
-        public SignInPageViewModel(LaunchDarklyService launchDarklyService)
+        public SignInPageViewModel()
         {
-            this.launchDarklyService = launchDarklyService;
             SignInClickedCommand = new DelegateCommand(SignIn);
         }
 
@@ -26,7 +25,6 @@ namespace Advocates.ViewModels
             {
                 // Sign-in succeeded.
                 UserInformation userInfo = await Auth.SignInAsync();
-                launchDarklyService.Init(userInfo.AccountId);
 
                 Xamarin.Essentials.Preferences.Set("isLoggedIn", true);
             }
@@ -37,6 +35,5 @@ namespace Advocates.ViewModels
         }
 
 
-        private readonly LaunchDarklyService launchDarklyService;
     }
 }

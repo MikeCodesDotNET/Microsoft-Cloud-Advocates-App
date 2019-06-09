@@ -9,6 +9,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Forms;
 
+
 namespace Advocates.ViewModels
 {
     public class RssFeedPageViewModel : ViewModelBase
@@ -70,12 +71,17 @@ namespace Advocates.ViewModels
         //Commands 
         public DelegateCommand BlogPostSelectedCommand { get; set; }
         public DelegateCommand RefreshCommand { get; set; }
-        public DelegateCommand SearchCommand { get; set; }
+        public DelegateCommand SearchIconClickedCommand { get; set; }
 
 
-        public RssFeedPageViewModel()
+        public RssFeedPageViewModel(INavigationService navigationService)
         {
-            switch(Device.Idiom)
+            this.navigationService = navigationService;
+            SearchIconClickedCommand = new DelegateCommand(() =>
+            {
+                navigationService.NavigateAsync("RssFeedSearchPage");
+            });
+            switch (Device.Idiom)
             {
                 case TargetIdiom.Phone:
                     columnCount = 1;
@@ -102,10 +108,22 @@ namespace Advocates.ViewModels
 
         }
 
+
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             await RefreshData(true, true);
             SelectedBlogPost = null;
+        }
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            base.OnNavigatedFrom(parameters);
+
+            if (parameters.ContainsKey("searchRequest"))
+            {
+                var searchRequest = parameters.GetValue<SearchRequest>("searchRequest");
+              
+            }
         }
 
 
@@ -137,8 +155,9 @@ namespace Advocates.ViewModels
         {
             IsRefreshing = !backgroundRefresh;
             var bps = await Data.ListAsync<BlogPost>("readonly");
-            var unsorted = bps.CurrentPage.Items.Select(a => a.DeserializedValue).Where(x => x.ClassType == "BlogPost");
+            var unsorted = bps.CurrentPage.Items.Select(a => a.DeserializedValue).Where(x => x.ClassType == "BlogPost").OrderBy(x => x.PublishedDate);
             blogPosts.ReplaceRange(unsorted);
+
             Filtered = new ObservableRangeCollection<BlogPost>(blogPosts);
             IsRefreshing = false;
         }

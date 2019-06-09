@@ -31,5 +31,23 @@ namespace Advocates.iOS.Renderers
 
         }
 
+        //Comment out if you want tab labels.
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            if (Device.Idiom == TargetIdiom.Phone)
+            {
+                for (int i = 0; i < TabBar.Items.Length; i++)
+                {
+                    TabBar.Items[i].SetTitleTextAttributes(new UITextAttributes() { TextColor = UIColor.Clear }, UIControlState.Selected);
+                    TabBar.Items[i].SetTitleTextAttributes(new UITextAttributes() { TextColor = UIColor.Clear }, UIControlState.Normal);
+
+                    TabBar.Items[i].ImageInsets = new UIEdgeInsets(8, 0, -8, 0);
+
+                }
+            }
+        }
+
     }
+
 }

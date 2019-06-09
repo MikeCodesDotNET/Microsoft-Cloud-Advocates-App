@@ -26,6 +26,7 @@ namespace Advocates.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Forms.SetFlags("CollectionView_Experimental");
+            Rg.Plugins.Popup.Popup.Init();
 
             global::Xamarin.Forms.Forms.Init();
             FormsMaps.Init();
