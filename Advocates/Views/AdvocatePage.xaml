@@ -425,7 +425,7 @@
                         <controls:Separator Grid.Row="1" Color="#e8e8e8" Thickness="1" Margin="15" />
                     </StackLayout>
                     
-                    
+               
                     <Button 
                         Text="Favourite"
                         Margin="20,0,20,20"

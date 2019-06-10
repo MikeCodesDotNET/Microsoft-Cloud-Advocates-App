@@ -67,6 +67,7 @@ namespace Advocates
 
             containerRegistry.RegisterForNavigation<AdvocatesPage>();
             containerRegistry.RegisterForNavigation<TrackingLinksPage>();
+            containerRegistry.RegisterForNavigation<NewTrackingLinkPage>();
 
             containerRegistry.RegisterForNavigationOnIdiom<AdvocatePage, AdvocatePageViewModel>(desktopView: typeof(AdvocatePage),
                                                                        tabletView: typeof(AdvocatePageTablet));

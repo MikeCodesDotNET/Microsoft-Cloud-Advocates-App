@@ -5,6 +5,12 @@
     x:Class="Advocates.Views.TrackingLinksPage"
     Title="Tracking Links"
     Icon="Tabbar_Links.png">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddTrackingLinkCommand}">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <Label Text="Hello World"/>
     </ContentPage.Content>
