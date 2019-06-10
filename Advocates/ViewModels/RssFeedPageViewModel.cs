@@ -74,9 +74,11 @@ namespace Advocates.ViewModels
         public DelegateCommand SearchIconClickedCommand { get; set; }
 
 
-        public RssFeedPageViewModel(INavigationService navigationService)
+        public RssFeedPageViewModel(INavigationService navigationService, BlogFeedDataService blogFeedDataService)
         {
             this.navigationService = navigationService;
+            this.blogFeedDataService = blogFeedDataService;
+
             SearchIconClickedCommand = new DelegateCommand(() =>
             {
                 navigationService.NavigateAsync("RssFeedSearchPage");
@@ -154,14 +156,10 @@ namespace Advocates.ViewModels
         private async Task RefreshData(bool backgroundRefresh, bool force)
         {
             IsRefreshing = !backgroundRefresh;
-            var bps = await Data.ListAsync<BlogPost>("readonly");
 
-            //Bit of a hack, I have to call reverse twice to get it to work. If you remove this, it wont order by newest at the top.
-            var unsorted = bps.CurrentPage.Items.Select(a => a.DeserializedValue).Where(x => x.ClassType == "BlogPost").OrderBy(x => x.PublishedDate).Reverse();
-            unsorted.Reverse().ToList();
-            blogPosts.ReplaceRange(unsorted);
+            if(Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.None)
+                Filtered = new ObservableRangeCollection<BlogPost>(await blogFeedDataService.GetPosts());
 
-            Filtered = new ObservableRangeCollection<BlogPost>(blogPosts);
             IsRefreshing = false;
         }
 
@@ -170,6 +168,7 @@ namespace Advocates.ViewModels
         private ObservableRangeCollection<BlogPost> blogPosts = new ObservableRangeCollection<BlogPost>();
         private ObservableRangeCollection<BlogPost> filtered = new ObservableRangeCollection<BlogPost>();
 
+        private readonly BlogFeedDataService blogFeedDataService;
         private readonly INavigationService navigationService;
         bool isRefreshing;
         string searchText;

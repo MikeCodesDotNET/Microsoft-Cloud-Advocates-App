@@ -251,5 +251,8 @@
     <BundleResource Include="Resources\Search%402x.png" />
     <BundleResource Include="Resources\Search%403x.png" />
     <BundleResource Include="Resources\BIT_PUPPIES.png" />
+    <BundleResource Include="Resources\Tabbar_Links.png" />
+    <BundleResource Include="Resources\Tabbar_Links%402x.png" />
+    <BundleResource Include="Resources\Tabbar_Links%403x.png" />
   </ItemGroup>
 </Project>

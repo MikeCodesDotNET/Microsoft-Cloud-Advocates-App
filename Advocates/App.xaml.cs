@@ -38,7 +38,7 @@ namespace Advocates
                     typeof(Data), typeof(Analytics), typeof(Crashes), typeof(Push), typeof(Distribute), typeof(Auth));
 
             INavigationResult result; 
-            result = await NavigationService.NavigateAsync($"TabbedPage?{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|RssFeedPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|AdvocatesPage&{KnownNavigationParameters.CreateTab}=NavigationPage|SignInPage");
+            result = await NavigationService.NavigateAsync($"TabbedPage?{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|RssFeedPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|AdvocatesPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|TrackingLinksPage&{KnownNavigationParameters.CreateTab}=NavigationPage|SignInPage");
       
 
 
@@ -66,6 +66,7 @@ namespace Advocates
             containerRegistry.RegisterForNavigation<NavigationPage>();
 
             containerRegistry.RegisterForNavigation<AdvocatesPage>();
+            containerRegistry.RegisterForNavigation<TrackingLinksPage>();
 
             containerRegistry.RegisterForNavigationOnIdiom<AdvocatePage, AdvocatePageViewModel>(desktopView: typeof(AdvocatePage),
                                                                        tabletView: typeof(AdvocatePageTablet));
