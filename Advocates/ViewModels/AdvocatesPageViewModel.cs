@@ -91,8 +91,7 @@ namespace Advocates.ViewModels
         {
            
             IsRefreshing = !backgroundRefresh;
-            var result = await Data.ListAsync<Advocate>(DefaultPartitions.AppDocuments);
-            advocates = new ObservableRangeCollection<Advocate>(result.CurrentPage.Items.Select(a => a.DeserializedValue));
+            advocates = new ObservableRangeCollection<Advocate>(await advoatesDataService.GetAdvcoates());
             Filtered = new ObservableRangeCollection<Advocate>(advocates);
 
             IsRefreshing = false;
@@ -105,8 +104,8 @@ namespace Advocates.ViewModels
         {
             if(Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.Internet || Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.ConstrainedInternet)
             {
-                Filtered = new ObservableRangeCollection<Advocate>(await advoatesDataService.GetAdvcoates());
-                
+                advocates = new ObservableRangeCollection<Advocate>(await advoatesDataService.GetAdvcoates());
+                Filtered = new ObservableRangeCollection<Advocate>(advocates);
             }
 
         }
