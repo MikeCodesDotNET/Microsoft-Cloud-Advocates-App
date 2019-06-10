@@ -59,7 +59,7 @@ namespace Advocates
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<ILoggerFacade, LocalLogger>();
-
+            containerRegistry.Register(typeof(AdvocatesDataService));
             containerRegistry.RegisterForNavigation<TabbedPage>();
             containerRegistry.RegisterForNavigation<MasterDetailPage>();
             containerRegistry.RegisterForNavigation<LargeTextNavigationPage>();

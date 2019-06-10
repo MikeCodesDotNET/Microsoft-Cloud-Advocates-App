@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Advocates.Models;
+using Advocates.Services;
 using Microsoft.AppCenter.Data;
 using MvvmHelpers;
 using Prism.Commands;
@@ -40,9 +41,10 @@ namespace Advocates.ViewModels
 
 
         //Constructor 
-        public AdvocatesPageViewModel(INavigationService navigationService)
+        public AdvocatesPageViewModel(INavigationService navigationService, AdvocatesDataService advoatesDataService)
         {
             this.navigationService = navigationService;
+            this.advoatesDataService = advoatesDataService;
             filtered = new ObservableRangeCollection<Advocate>();
             Filtered = new ObservableRangeCollection<Advocate>();
 
@@ -103,11 +105,8 @@ namespace Advocates.ViewModels
         {
             if(Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.Internet || Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.ConstrainedInternet)
             {
-                var result = await Data.ListAsync<Advocate>(DefaultPartitions.AppDocuments);
-                var unsorted = result.CurrentPage.Items.Select(a => a.DeserializedValue).Where(x => x.ClassType == "Advocate");
-
-                advocates = new ObservableRangeCollection<Advocate>(unsorted.OrderBy(x => x.Name));
-                Filtered = new ObservableRangeCollection<Advocate>(advocates);
+                Filtered = new ObservableRangeCollection<Advocate>(await advoatesDataService.GetAdvcoates());
+                
             }
 
         }
@@ -118,6 +117,7 @@ namespace Advocates.ViewModels
         private ObservableRangeCollection<Advocate> advocates;
         private ObservableRangeCollection<Advocate> filtered;
 
+        private readonly AdvocatesDataService advoatesDataService;
         private readonly INavigationService navigationService;
         bool isRefreshing;
         string searchText;

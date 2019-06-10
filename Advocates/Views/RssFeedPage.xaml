@@ -8,6 +8,7 @@
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="Blog Posts"
+    BackgroundColor="{StaticResource BackgroundColor}"
     ios:Page.UseSafeArea="true"
     ios:Page.LargeTitleDisplay="Never"
     x:Class="Advocates.Views.RssFeedPage"
@@ -25,6 +26,7 @@
         <CollectionView
             x:Name="blogCollectionView"
             ItemsSource="{Binding Filtered}"
+            BackgroundColor="{StaticResource BackgroundColor}"
             SelectionMode="Single"
             SelectedItem="{Binding SelectedBlogPost}"
             SelectionChanged="OnCollectionViewSelectionChanged">

@@ -155,7 +155,10 @@ namespace Advocates.ViewModels
         {
             IsRefreshing = !backgroundRefresh;
             var bps = await Data.ListAsync<BlogPost>("readonly");
-            var unsorted = bps.CurrentPage.Items.Select(a => a.DeserializedValue).Where(x => x.ClassType == "BlogPost").OrderBy(x => x.PublishedDate);
+
+            //Bit of a hack, I have to call reverse twice to get it to work. If you remove this, it wont order by newest at the top.
+            var unsorted = bps.CurrentPage.Items.Select(a => a.DeserializedValue).Where(x => x.ClassType == "BlogPost").OrderBy(x => x.PublishedDate).Reverse();
+            unsorted.Reverse().ToList();
             blogPosts.ReplaceRange(unsorted);
 
             Filtered = new ObservableRangeCollection<BlogPost>(blogPosts);

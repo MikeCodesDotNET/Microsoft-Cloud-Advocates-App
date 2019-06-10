@@ -10,12 +10,54 @@
         IconImageSource="Tabbar_Me.png"
     x:Class="Advocates.Views.SignInPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="20, 40, 20, 0" VerticalOptions="FillAndExpand">
+            <ffimageloading:CachedImage 
+                    Margin="15,10,15,5"
+                    CacheType="Memory"
+                    Aspect="AspectFit" 
+                    HeightRequest="200" 
+                    Source="BIT_PUPPIES.png"/>
+                 
+                    
+            <Label 
+                AutomationId="lblName"
+                Text="Sign In to unlock extra functionality." 
+                Margin="0,10,12,0"
+                HeightRequest="40"
+                FontFamily="Poppins ExtraLight"
+                Style="{DynamicResource TitleStyle}"
+                TextColor="#2E2E2E"
+                FontSize="18"/>
+            
             <Button
+                Margin="0,10,0,20"
+                VerticalOptions="End"
                 Text="Sign In"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
+                HorizontalOptions="FillAndExpand"
+                FontFamily="Poppins SemiBold"
+                BackgroundColor="{StaticResource AccentColor}"
+                TextColor="{StaticResource TextColor}"
                 Command="{Binding SignInClickedCommand}"/>
+            
+            <Label 
+                AutomationId="lblName"
+                Text="You'll never recieve any spam from here..." 
+                HorizontalTextAlignment="Center"
+                Margin="0,10,12,0"
+                HeightRequest="40"
+                FontFamily="Poppins Light"
+                Style="{DynamicResource TitleStyle}"
+                TextColor="#2E2E2E"
+                FontSize="12"/>
+            <Label 
+                AutomationId="lblName"
+                Text="Read our privacy policy." 
+                HorizontalTextAlignment="Center"
+                HeightRequest="40"
+                FontFamily="Poppins Medium"
+                Style="{DynamicResource TitleStyle}"
+                TextColor="#2E2E2E"
+                FontSize="11"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

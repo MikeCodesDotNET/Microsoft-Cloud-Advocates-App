@@ -10,7 +10,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <styles:Base/>  
-                <styles:Azure/>
+                <styles:AzureDark/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </prism:PrismApplication.Resources>

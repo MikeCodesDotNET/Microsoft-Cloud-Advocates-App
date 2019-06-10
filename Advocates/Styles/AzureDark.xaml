@@ -2,22 +2,21 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:styles="using:Advocates.Styles"
-    x:Class="Advocates.Styles.Azure">
+    x:Class="Advocates.Styles.AzureDark">
 
     <!-- Overrides Default Resources -->   
     <Color x:Key="AccentColor">#0078D7</Color>
-    <Color x:Key="BackgroundColor">#2E2E2E</Color>
-    <Color x:Key="BackgroundColorDark">#0063B0</Color> 
-    <Color x:Key="SeparatorColor">#EEEEEE</Color>
-    <Color x:Key="RssCellBackgroundColor">#F0F0F0</Color>
-
-    <Color x:Key="TextColor">#FFFFFF</Color>
-    <Color x:Key="TextColorSubtle">#777777</Color>
+    <Color x:Key="BackgroundColor">#000000</Color>
+    <Color x:Key="BackgroundColorDark">#000000</Color> 
+    <Color x:Key="SeparatorColor">#323232</Color>
+    <Color x:Key="RssCellBackgroundColor">#323232</Color>
+    <Color x:Key="TextColor">#EAEAEA</Color>
+    <Color x:Key="TextColorSubtle">#EAEAEA</Color>
     <Color x:Key="TextColorPlaceholder">#777777</Color>
-    <Color x:Key="SearchBarBackgroundColor">#0063B0</Color>
+    <Color x:Key="SearchBarBackgroundColor">#CDCDCD</Color>
     
     <OnPlatform x:Key="EntryBackgroundColor" x:TypeArguments="Color">
-        <On Platform="iOS" Value="#F5F5F5" />
+        <On Platform="iOS" Value="#474747" />
         <On Platform="Android" Value="Transparent" />
     </OnPlatform>
     

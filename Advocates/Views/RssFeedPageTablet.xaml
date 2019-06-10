@@ -12,6 +12,7 @@
     ios:Page.LargeTitleDisplay="Always"
     x:Class="Advocates.Views.RssFeedPageTablet"
     x:Name="rssFeedPageTablet"
+    BackgroundColor="{StaticResource BackgroundColor}"
     IconImageSource="Tabbar_RSS.png"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
        
@@ -32,6 +33,7 @@
                 <SearchBar 
                     x:Name="searchBar"
                     AutomationId="searchBar"
+                    BackgroundColor="{StaticResource BackgroundColor}"
                     Style="{StaticResource SearchBarStyle}"
                     SearchCommand="{Binding SearchCommand}"
                     Text="{Binding SearchText}"
@@ -55,9 +57,9 @@
             
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid BackgroundColor="White">
+                    <Grid BackgroundColor="{StaticResource BackgroundColor}">
                         <pancake:PancakeView
-                            BackgroundColor="#F0F0F0"
+                            BackgroundColor="{StaticResource RssCellBackgroundColor}"
                             CornerRadius="15" 
                             Margin="15"
                             HeightRequest="250"
