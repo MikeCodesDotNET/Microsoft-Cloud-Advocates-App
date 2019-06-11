@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="Advocates.Views.TrackingLinksPage"
+    Title="Tracking Links"
+    x:Name="trackingLinksPage"
+    Icon="Tabbar_Links.png" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddTrackingLinkCommand}">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+       <ListView 
+            AutomationId="advocatesListView"
+            ItemsSource="{Binding TrackinngLinks}" 
+            BackgroundColor="Transparent" 
+            HasUnevenRows="true"
+            RowHeight="80"
+            SeparatorVisibility="Default"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+            RefreshCommand="{Binding RefreshCommand}">
+            
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                                  EventArgsParameterPath="Item"
+                                                  Command="{Binding BindingContext.TrackingLinkSelectedCommand,
+                                                  Source={x:Reference trackingLinksPage}}" />
+            </ListView.Behaviors>
+        
+        <ListView.Header>
+            <Grid>
+                <SearchBar 
+                    x:Name="searchBar"
+                    AutomationId="searchBar"
+                    Style="{StaticResource SearchBarStyle}"
+                    SearchCommand="{Binding SearchCommand}"
+                    Text="{Binding SearchText}"
+                    IsSpellCheckEnabled="false"
+                    Placeholder="Search">
+                        <SearchBar.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                  Command="{Binding BindingContext.SearchCommand,
+                                                  Source={x:Reference trackingLinksPage}}" />
+                        </SearchBar.Behaviors>
+                </SearchBar>
+            </Grid>
+        </ListView.Header>
+        
+        <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid 
+                            BackgroundColor="{StaticResource BackgroundColorItem}"
+                            ColumnSpacing="0">
+                            
+                            <Grid.RowDefinitions>                                
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+
+                            <StackLayout 
+                                Grid.Column="1"
+                                Spacing="0"
+                                VerticalOptions="Center"
+                                Padding="12,14">
+                                
+                                <Label 
+                                    x:Name="lblName"
+                                    AutomationId="lblName"
+                                    Margin="0,6,0,0"
+                                    VerticalTextAlignment="Center"
+                                    FontFamily="Poppins SemiBold"
+                                    TextColor="#2E2E2E"
+                                    FontSize="18"
+                                    Text="{Binding Name}" 
+                                    LineBreakMode="TailTruncation" />
+                            </StackLayout>
+
+                   
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+    </ListView>
+        
+    </ContentPage.Content>
+</ContentPage>
