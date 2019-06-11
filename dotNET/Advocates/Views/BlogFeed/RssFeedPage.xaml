@@ -11,6 +11,7 @@
     ios:Page.UseSafeArea="true"
     ios:Page.LargeTitleDisplay="Never"
     x:Class="Advocates.Views.RssFeedPage"
+    BackgroundColor="White"
     x:Name="rssFeedPage"
     IconImageSource="Tabbar_RSS.png"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
@@ -25,8 +26,8 @@
         <CollectionView
             x:Name="blogCollectionView"
             ItemsSource="{Binding Filtered}"
-            BackgroundColor="{StaticResource BackgroundColor}"
             SelectionMode="Single"
+            BackgroundColor="White"
             SelectedItem="{Binding SelectedBlogPost}"
             SelectionChanged="OnCollectionViewSelectionChanged">
   

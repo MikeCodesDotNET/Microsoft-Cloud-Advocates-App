@@ -116,21 +116,6 @@ namespace Advocates.ViewModels
             SelectedBlogPost = null;
         }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-
-            // According to this: https://github.com/PrismLibrary/Prism/issues/977
-            // The parent shouldn't be called...and yet it is. I'd ask Brian but don't 
-            // want to be called an idiot or insulted, so instead I'm just goin to try
-            // and hack around it...wonderful community engagement from the Prism team..
-
-            if (UserDataService.CurrentUser == null && UserDataService.SignInShown == false)
-            {
-                await navigationService.NavigateAsync("SignInPage", null, true, true);
-            }
-
-        }
 
         public override void OnNavigatedFrom(INavigationParameters parameters)
         {
