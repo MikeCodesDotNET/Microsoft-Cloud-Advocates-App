@@ -31,9 +31,8 @@ namespace Advocates.ViewModels
         {
             try
             {
-                // Sign-in succeeded.
+                // Present the Sign In view
                 UserInformation userInfo = await Auth.SignInAsync();
-
                 await navigationService.NavigateAsync("NewUserPage", new NavigationParameters { { "userId", userInfo.AccountId } }, true, true);
 
             }

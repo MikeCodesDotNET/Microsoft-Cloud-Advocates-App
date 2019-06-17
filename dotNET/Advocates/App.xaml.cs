@@ -32,7 +32,7 @@ namespace Advocates
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
+            
 
             //Init App Center Data!  
             AppCenter.Start(Helpers.Constants.AppCenterApiKey,

@@ -25,6 +25,11 @@ namespace Advocates.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+
+            #if ENABLE_TEST_CLOUD
+            Xamarin.Calabash.Start();
+            #endif
+
             Forms.SetFlags("CollectionView_Experimental");
             Rg.Plugins.Popup.Popup.Init();
 
