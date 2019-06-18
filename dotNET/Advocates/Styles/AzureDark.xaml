@@ -1,0 +1,126 @@
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:styles="using:Advocates.Styles"
+    x:Class="Advocates.Styles.AzureDark">
+
+    <!-- Overrides Default Resources -->   
+    <Color x:Key="AccentColor">#0078D7</Color>
+    <Color x:Key="BackgroundColor">#000000</Color>
+    <Color x:Key="BackgroundColorDark">#000000</Color> 
+    <Color x:Key="SeparatorColor">#323232</Color>
+    <Color x:Key="RssCellBackgroundColor">#323232</Color>
+    <Color x:Key="TextColor">#EAEAEA</Color>
+    <Color x:Key="TextColorSubtle">#EAEAEA</Color>
+    <Color x:Key="TextColorPlaceholder">#777777</Color>
+    <Color x:Key="SearchBarBackgroundColor">#CDCDCD</Color>
+    
+    <OnPlatform x:Key="EntryBackgroundColor" x:TypeArguments="Color">
+        <On Platform="iOS" Value="#474747" />
+        <On Platform="Android" Value="Transparent" />
+    </OnPlatform>
+    
+    
+     <!-- Label Styles -->
+    <Style x:Key="TitleLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeTitle}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMedium}" />                
+    </Style>
+    
+    
+
+    <Style x:Key="LargeLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyRegular}" />                
+    </Style>
+
+    <Style x:Key="RegularLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyRegular}" />                
+    </Style>
+
+    <Style x:Key="SectionHaderLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMedium}" />                
+    </Style>
+
+    <Style x:Key="PropertyLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource AccentColorRed}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMedium}" />                
+    </Style>
+    
+    <Style x:Key="PropertyFooterLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource TextColorSubtle}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyRegular}" />                
+    </Style>
+
+    <!-- Entry Styles -->
+    <Style x:Key="EntryStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource TextColorPlaceholder}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyRegular}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource EntryBackgroundColor}" />
+        <Setter Property="HeightRequest" Value="40" />
+    </Style>   
+
+    <Style x:Key="SearchBarStyle" TargetType="SearchBar">
+        <Setter Property="TextColor" Value="{DynamicResource AccentColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyRegular}" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="HeightRequest" Value="70" />
+    </Style>
+
+    <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+        <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource EntryBackgroundColor}" />
+        <Setter Property="HeightRequest" Value="40" />
+    </Style> 
+
+    <!-- Button Styles -->
+    <Style x:Key="SubmitButtonStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{DynamicResource TextColorButton}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource AccentColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMedium}" />                
+        <Setter Property="HeightRequest" Value="50" />                
+    </Style>
+
+    <Style x:Key="FullWidthButtonStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{DynamicResource TextColorButton}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource AccentColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeRegular}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMedium}" />                
+        <Setter Property="HeightRequest" Value="50" />                
+        <Setter Property="BorderRadius" Value="0" />                
+        <Setter Property="Margin">
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0" />
+                <On Platform="iOS" Value="{DynamicResource DefaultMargin}" />
+            </OnPlatform>
+        </Setter>
+    </Style>
+    
+        <Style x:Key="ListViewHaderLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource AccentColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMedium}" />   
+        <Setter Property="FontAttributes" Value="Bold" />   
+
+        
+        <Setter Property="Margin">
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0" />
+                <On Platform="iOS" Value="{DynamicResource DefaultMargin}" />
+            </OnPlatform>
+        </Setter>
+    </Style>
+    
+
+</ResourceDictionary>

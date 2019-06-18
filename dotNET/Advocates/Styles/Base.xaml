@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Advocates.Styles.Base">
+    
+     <!-- Colors -->
+    <Color x:Key="AccentColor">#4D4DC2</Color>
+    <Color x:Key="AccentColorDark">#35357D</Color>
+    <Color x:Key="AccentColorRed">#D83E01</Color>
+    <Color x:Key="AccentColorBlue">#0193D8</Color>
+    <Color x:Key="AccentColorOrange">#FFAB89</Color>
+    <Color x:Key="AccentColorDarkOrange">#F5A623</Color>
+
+    <Color x:Key="TextColorButton">#FFFFFF</Color>
+    <Color x:Key="BackgroundColorItem">#FFFFFF</Color> 
+    <Color x:Key="TextColorItem">#000000</Color>
+    <Color x:Key="TextColorItemSecondary">#555555</Color>
+    <Color x:Key="ItemSeparatorColor">#EEEEEE</Color>
+
+    <!-- Colors to override by themes -->
+    <Color x:Key="BackgroundColor">#FF00FF</Color>
+    <Color x:Key="BackgroundColorDark">#FF00FF</Color> 
+    <Color x:Key="SeparatorColor">#FF00FF</Color>
+    <Color x:Key="TextColor">#FF00FF</Color>
+    <Color x:Key="TextColorSubtle">#FF00FF</Color>
+    <Color x:Key="TextColorPlaceholder">#FF00FF</Color>
+    <OnPlatform x:Key="EntryBackgroundColor" x:TypeArguments="Color">
+        <On Platform="iOS" Value="#FF00FF" />
+        <On Platform="Android" Value="Transpartent" />
+    </OnPlatform>
+    <OnPlatform x:Key="SearchBarBackgroundColor" x:TypeArguments="Color">
+        <On Platform="iOS" Value="#FF00FF" />
+        <On Platform="Android" Value="Transpartent" />
+    </OnPlatform>
+    
+    <!-- Thicknesses -->
+    <OnPlatform
+        x:Key="DefaultMargin"
+        x:TypeArguments="x:Double"
+        Android="10"
+        WinPhone="10"
+        iOS="10" />
+
+    <Thickness
+        x:Key="DefaultThickness"
+        Bottom="{StaticResource DefaultMargin}"
+        Left="{StaticResource DefaultMargin}"
+        Right="{StaticResource DefaultMargin}"
+        Top="{StaticResource DefaultMargin}" />
+
+    <!-- Font Families -->
+    <OnPlatform x:Key="font_black" x:TypeArguments="x:String">
+        <On Platform="Android" Value="Fonts/SofiaProBlack.otf#SofiaPro-Black" />
+        <On Platform="iOS" Value="Poppins SemiBold" />
+    </OnPlatform>
+    
+    <OnPlatform x:Key="font_bold" x:TypeArguments="x:String">
+        <On Platform="Android" Value="Fonts/SofiaProBold.otf#SofiaPro-Bold" />
+        <On Platform="iOS" Value="Poppins SemiBold" />
+    </OnPlatform>
+    
+    <OnPlatform x:Key="font_normal" x:TypeArguments="x:String">
+        <On Platform="Android" Value="Fonts/SofiaProRegular.otf#SofiaProRegular" />
+        <On Platform="iOS" Value="Poppins Regular" />
+    </OnPlatform>
+
+    <!-- Font Sizes -->
+    <OnPlatform x:Key="FontSizeTitle" x:TypeArguments="x:Double">
+        <On Platform="iOS">32</On>
+        <On Platform="Android">32</On>
+    </OnPlatform>                        
+
+    <OnPlatform x:Key="FontSizeLarge" x:TypeArguments="x:Double">
+        <On Platform="iOS">19</On>
+        <On Platform="Android">19</On>
+    </OnPlatform>  
+    
+    <OnPlatform x:Key="FontSizeRegular" x:TypeArguments="x:Double">
+        <On Platform="iOS">16</On>
+        <On Platform="Android">16</On>
+    </OnPlatform>  
+    
+    <OnPlatform x:Key="FontSizeSmall" x:TypeArguments="x:Double">
+        <On Platform="iOS">12</On>
+        <On Platform="Android">12</On>
+    </OnPlatform> 
+    
+</ResourceDictionary>
