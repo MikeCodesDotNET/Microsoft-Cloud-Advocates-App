@@ -8,6 +8,7 @@ using Microsoft.AppCenter.Data;
 using MvvmHelpers;
 using Prism.Commands;
 using Prism.Navigation;
+using Xamarin.Forms;
 
 namespace Advocates.ViewModels
 {
@@ -65,6 +66,7 @@ namespace Advocates.ViewModels
                 { "advocate", selectedAdvocate }
             };
 
+            Application.Current.AppLinks.RegisterLink(GetAppLink(selectedAdvocate));
             await navigationService.NavigateAsync("AdvocatePage", parameters);
         }
 
@@ -110,6 +112,26 @@ namespace Advocates.ViewModels
 
         }
 
+        private AppLinkEntry GetAppLink(Advocate selectedAdvocate)
+        {
+            var url = $"https://prod-07.uksouth.logic.azure.com//workflows/aeff65f5a1b4455194c76cbebb7c37e5/triggers/manual/paths/invoke/advocates/{selectedAdvocate.Id}?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=UDLBr6nQ8CavBDu2npLlFACbUV6wmeeuHEHipwJq09A";
+
+            var pageType = GetType().ToString();
+            var pageLink = new AppLinkEntry
+            {
+                Title = selectedAdvocate.Name,
+                Description = selectedAdvocate.Bio,
+                AppLinkUri = new Uri(url, UriKind.RelativeOrAbsolute),
+                IsLinkActive = true,
+                Thumbnail = ImageSource.FromFile(selectedAdvocate.AvatarUrl)
+            };
+
+            pageLink.KeyValues.Add("contentType", "Cloud Advocate");
+            pageLink.KeyValues.Add("appName", "Advocates");
+            pageLink.KeyValues.Add("companyName", "Xamarin");
+
+            return pageLink;
+        }
 
 
         //Fields

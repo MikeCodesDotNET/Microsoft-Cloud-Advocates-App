@@ -53,7 +53,6 @@ namespace Advocates
             {
                 Xamarin.Essentials.Preferences.Set("isLoggedIn", false);
             }
-
         }
 
 
@@ -89,6 +88,12 @@ namespace Advocates
             containerRegistry.RegisterForNavigation<SignInPage>();
             containerRegistry.RegisterForNavigation<NewUserPage>();
 
+        }
+
+        protected override void OnAppLinkRequestReceived(Uri uri)
+        {
+
+            base.OnAppLinkRequestReceived(uri);
         }
 
 

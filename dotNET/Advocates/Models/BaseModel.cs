@@ -1,9 +1,14 @@
 ﻿using System;
 namespace Advocates.Models
 {
-    public abstract class BaseModel
+    public class BaseModel
     {
-        public Guid Id { get; set; } = Guid.NewGuid(); //generates random id
+        public BaseModel()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
+        public string Id { get; set; }
 
 
         // use virtual keyword

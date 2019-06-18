@@ -12,6 +12,7 @@ using Microsoft.AppCenter.Data;
 using Prism.Services;
 using Advocates.Services;
 using Xamarin.Forms.Maps;
+using Xamarin.Forms;
 
 namespace Advocates.ViewModels
 {
@@ -101,6 +102,11 @@ namespace Advocates.ViewModels
 
         }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+        }
+
         private async void TwitterTapped()
         {
             await Xamarin.Essentials.Browser.OpenAsync($"https://www.twitter.com/{Advocate.TwitterHandle}");
@@ -120,6 +126,8 @@ namespace Advocates.ViewModels
             await Data.CreateAsync(favourite.Id.ToString(), favourite, DefaultPartitions.UserDocuments);
             await dialogService.DisplayAlertAsync("Favourited!", $"You just favourited {advocate.Name}", "OK");
         }
+
+
 
 
         private readonly INavigationService navigationService;
