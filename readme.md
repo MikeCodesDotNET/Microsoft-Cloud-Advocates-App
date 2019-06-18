@@ -1,6 +1,6 @@
 # Advocates App 
 
-![Banner](Resources/HeaderImage.png)
+![Banner](Resources/headerimage.png)
 
 This application is designed to demonstrate how to build Xamarin.Forms 4.x mobile apps targeting both iOS and Android. 
 
