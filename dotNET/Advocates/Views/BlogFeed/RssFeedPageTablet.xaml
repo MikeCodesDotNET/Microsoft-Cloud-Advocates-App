@@ -12,7 +12,7 @@
     ios:Page.LargeTitleDisplay="Always"
     x:Class="Advocates.Views.RssFeedPageTablet"
     x:Name="rssFeedPageTablet"
-    BackgroundColor="{StaticResource BackgroundColor}"
+    BackgroundColor="White"
     IconImageSource="Tabbar_RSS.png"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
        
@@ -48,16 +48,14 @@
             SelectedItem="{Binding SelectedBlogPost}"
             SelectionChanged="OnCollectionViewSelectionChanged">
   
-            
-          
-            
+                
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="4"/>
             </CollectionView.ItemsLayout>
             
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid BackgroundColor="{StaticResource BackgroundColor}">
+                    <Grid BackgroundColor="White">
                         <pancake:PancakeView
                             BackgroundColor="{StaticResource RssCellBackgroundColor}"
                             CornerRadius="15" 

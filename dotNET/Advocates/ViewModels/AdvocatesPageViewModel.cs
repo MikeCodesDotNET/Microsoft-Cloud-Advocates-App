@@ -67,7 +67,6 @@ namespace Advocates.ViewModels
                 { "advocate", selectedAdvocate }
             };
 
-            Application.Current.AppLinks.RegisterLink(GetAppLink(selectedAdvocate));
             await navigationService.NavigateAsync("AdvocatePage", parameters);
         }
 

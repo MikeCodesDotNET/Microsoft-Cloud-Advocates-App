@@ -170,8 +170,6 @@ namespace Advocates.ViewModels
             IsRefreshing = false;
         }
 
-
-
         private ObservableRangeCollection<BlogPost> blogPosts = new ObservableRangeCollection<BlogPost>();
         private ObservableRangeCollection<BlogPost> filtered = new ObservableRangeCollection<BlogPost>();
 

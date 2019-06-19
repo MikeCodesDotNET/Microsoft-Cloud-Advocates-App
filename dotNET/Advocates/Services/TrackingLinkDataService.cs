@@ -36,7 +36,9 @@ namespace Advocates.Services
 
             try
             {
-                await Data.CreateAsync(trackingLink.Id.ToString(), trackingLink, DefaultPartitions.UserDocuments, new WriteOptions(TimeToLive.Infinite));
+                await Data.CreateAsync(trackingLink.Id.ToString(), trackingLink, 
+                                       DefaultPartitions.UserDocuments, 
+                                       new WriteOptions(TimeToLive.Infinite));
                 return true;
             }
             catch(Exception ex)

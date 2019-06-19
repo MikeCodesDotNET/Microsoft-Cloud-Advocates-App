@@ -59,6 +59,10 @@ namespace Advocates.iOS
             var result = Push.DidReceiveRemoteNotification(userInfo);
             if (result)
             {
+                var container = formsApp.Container;
+                var eventAggregator = container.Resolve<IEventAggregator>();
+                eventAggregator.GetEvent<Helpers.NewBlogPostEvent>().Publish();
+
                 completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
             }
             else
@@ -72,10 +76,7 @@ namespace Advocates.iOS
         [Export("userNotificationCenter:willPresentNotification:withCompletionHandler:")]
         public async void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
         {
-            var container = formsApp.Container;
-            var eventAggregator = container.Resolve<IEventAggregator>();
-            eventAggregator.GetEvent<Helpers.NewBlogPostEvent>().Publish();
-
+            ForceRefresh();
             completionHandler(UNNotificationPresentationOptions.Sound | UNNotificationPresentationOptions.Alert);
         }
 
@@ -85,6 +86,8 @@ namespace Advocates.iOS
             var content = response.Notification.Request.Content;
             if(content != null)
             {
+                ForceRefresh(); 
+
                 var userInfo = content.UserInfo;
                 NSDictionary mobile_center = userInfo.ObjectForKey(new NSString("mobile_center")) as NSDictionary;
 
@@ -92,16 +95,15 @@ namespace Advocates.iOS
                 await Xamarin.Essentials.Browser.OpenAsync(url);
             }
 
-
             completionHandler();
         }
 
-
-        private void HandleNotificationWhilstActive()
+        private void ForceRefresh()
         {
-
+            var container = formsApp.Container;
+            var eventAggregator = container.Resolve<IEventAggregator>();
+            eventAggregator.GetEvent<Helpers.NewBlogPostEvent>().Publish();
         }
-
 
         private Advocates.App formsApp; 
     }

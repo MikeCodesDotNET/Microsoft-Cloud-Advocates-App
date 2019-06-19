@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="X5k-f2-b5h">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
+    <device id="ipad12_9rounded" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,44 +18,49 @@
                         <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="248" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" usesAttributedText="YES">
-                                <rect key="frame" x="20" y="688" width="374" height="21"/>
-                                <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                <nil key="highlightedColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="248">
+                                <rect key="frame" x="20" y="1317" width="984" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="hbo-kE-V62"/>
+                                </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="Made with love in London">
                                         <attributes>
-                                            <color key="NSColor" colorSpace="custom" customColorSpace="sRGB" red="0.937255" green="0.937255" blue="0.956863" alpha="1"/>
-                                            <font key="NSFont" name="Poppins-Light" family="Poppins Light" size="12"/>
+                                            <color key="NSColor" red="0.92144912481307983" green="0.92063164710998535" blue="0.9457709789276123" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="12" name="Poppins-Medium"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
+                                <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="455" translatesAutoresizingMaskIntoConstraints="NO" image="BitDevAdvocate.png">
-                                <rect key="frame" x="26" y="230" width="388" height="277"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BitDevAdvocate.png" translatesAutoresizingMaskIntoConstraints="NO" id="455">
+                                <rect key="frame" x="318" y="544.5" width="388" height="277"/>
                                 <constraints>
-                                    <constraint id="457" firstAttribute="height" constant="277"/>
-                                    <constraint id="458" firstAttribute="width" constant="388"/>
+                                    <constraint firstAttribute="width" constant="388" id="XCV-0v-pcj"/>
+                                    <constraint firstAttribute="height" constant="277" id="csq-wz-waS"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint id="456" firstItem="455" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" constant="13"/>
-                            <constraint id="461" firstItem="455" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY"/>
+                            <constraint firstItem="455" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" id="6aj-Rd-d4L"/>
+                            <constraint firstItem="9ZL-r4-8FZ" firstAttribute="top" secondItem="248" secondAttribute="bottom" constant="8" id="NHQ-PS-MsJ"/>
+                            <constraint firstItem="248" firstAttribute="leading" secondItem="yd7-JS-zBw" secondAttribute="leadingMargin" id="QBT-pm-0l7"/>
+                            <constraint firstItem="455" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" id="nTl-k3-GcX"/>
+                            <constraint firstItem="248" firstAttribute="trailing" secondItem="yd7-JS-zBw" secondAttribute="trailingMargin" id="oG4-fi-tt8"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="339"/>
+            <point key="canvasLocation" x="348.6328125" y="338.65300146412881"/>
         </scene>
     </scenes>
     <resources>
-        <image name="BitDevAdvocate.png" width="2663" height="2841"/>
+        <image name="BitDevAdvocate.png" width="639.1199951171875" height="681.84002685546875"/>
     </resources>
 </document>
