@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using FFImageLoading.Forms.Platform;
 using Foundation;
+using Microsoft.AppCenter.Push;
+using Prism.Events;
+using Prism.Ioc;
+using Prism.Navigation;
 using UIKit;
+using Unity;
+using UserNotifications;
 using Xamarin;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -14,7 +20,7 @@ namespace Advocates.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate, IUNUserNotificationCenterDelegate
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -38,12 +44,65 @@ namespace Advocates.iOS
 
             CachedImageRenderer.Init();
 
-            var formsApp = new App();
             UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, false);
-        
-            LoadApplication(new App());
+            formsApp = new App();
+
+            LoadApplication(formsApp);
+
+            UNUserNotificationCenter.Current.Delegate = this;
 
             return base.FinishedLaunching(app, options);
         }
+
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
+        {
+            var result = Push.DidReceiveRemoteNotification(userInfo);
+            if (result)
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
+            }
+            else
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
+            }
+
+        }
+
+
+        [Export("userNotificationCenter:willPresentNotification:withCompletionHandler:")]
+        public async void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
+        {
+            var container = formsApp.Container;
+            var eventAggregator = container.Resolve<IEventAggregator>();
+            eventAggregator.GetEvent<Helpers.NewBlogPostEvent>().Publish();
+
+            completionHandler(UNNotificationPresentationOptions.Sound | UNNotificationPresentationOptions.Alert);
+        }
+
+        [Export("userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:")]
+        public async void DidReceiveNotificationResponse(UNUserNotificationCenter center, UNNotificationResponse response, Action completionHandler)
+        {
+            var content = response.Notification.Request.Content;
+            if(content != null)
+            {
+                var userInfo = content.UserInfo;
+                NSDictionary mobile_center = userInfo.ObjectForKey(new NSString("mobile_center")) as NSDictionary;
+
+                var url = mobile_center.ValueForKey(new NSString("url")).ToString();
+                await Xamarin.Essentials.Browser.OpenAsync(url);
+            }
+
+
+            completionHandler();
+        }
+
+
+        private void HandleNotificationWhilstActive()
+        {
+
+        }
+
+
+        private Advocates.App formsApp; 
     }
 }

@@ -88,11 +88,11 @@ namespace Advocates
             containerRegistry.RegisterForNavigation<SignInPage>();
             containerRegistry.RegisterForNavigation<NewUserPage>();
 
+            ContainerRegistry = containerRegistry;
         }
 
         protected override void OnAppLinkRequestReceived(Uri uri)
         {
-
             base.OnAppLinkRequestReceived(uri);
         }
 
@@ -128,5 +128,6 @@ namespace Advocates
         }
 
        
+        public IContainerRegistry ContainerRegistry  { get; set; }
     }
 }

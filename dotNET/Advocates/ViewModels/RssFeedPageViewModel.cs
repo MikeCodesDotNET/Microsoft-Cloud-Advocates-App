@@ -6,6 +6,7 @@ using Advocates.Services;
 using Microsoft.AppCenter.Data;
 using MvvmHelpers;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -74,13 +75,16 @@ namespace Advocates.ViewModels
         public DelegateCommand SearchIconClickedCommand { get; set; }
 
 
-        public RssFeedPageViewModel(INavigationService navigationService, BlogFeedDataService blogFeedDataService, UserDataService userDataService)
+        public RssFeedPageViewModel(INavigationService navigationService, BlogFeedDataService blogFeedDataService, UserDataService userDataService, IEventAggregator eventAggregator)
         {
             this.navigationService = navigationService;
             this.blogFeedDataService = blogFeedDataService;
             this.userDataService = userDataService;
+            this.eventAggregator = eventAggregator;
 
-           SearchIconClickedCommand = new DelegateCommand(() =>
+            this.eventAggregator.GetEvent<Helpers.NewBlogPostEvent>().Subscribe(Refresh);
+
+            SearchIconClickedCommand = new DelegateCommand(() =>
             {
                 navigationService.NavigateAsync("RssFeedSearchPage");
             });
@@ -107,6 +111,9 @@ namespace Advocates.ViewModels
                 default:
                     ColumnCount = 1;
                     break;
+
+
+                
             }
         }
 
@@ -171,6 +178,7 @@ namespace Advocates.ViewModels
         private readonly BlogFeedDataService blogFeedDataService;
         private readonly INavigationService navigationService;
         private readonly UserDataService userDataService;
+        private readonly IEventAggregator eventAggregator; 
 
         bool isRefreshing;
         string searchText;

@@ -42,7 +42,8 @@ namespace Advocates.ViewModels
 
 
         //Constructor 
-        public AdvocatesPageViewModel(INavigationService navigationService, AdvocatesDataService advoatesDataService)
+        public AdvocatesPageViewModel(INavigationService navigationService, 
+                                      AdvocatesDataService advoatesDataService)
         {
             this.navigationService = navigationService;
             this.advoatesDataService = advoatesDataService;

@@ -10,10 +10,6 @@ namespace Advocates.Services
 {
     public class AdvocatesDataService
     {
-        public AdvocatesDataService()
-        {
-        }
-
         public async Task<IEnumerable<Advocate>> GetAdvcoates()
         {
             try
@@ -29,7 +25,5 @@ namespace Advocates.Services
                 return new List<Advocate>();
             }
         }
-
-
     }
 }

@@ -50,7 +50,7 @@ namespace Advocates.Services
         {
             try
             {
-                await Data.DeleteAsync<TrackingLink>(trackingLink.Id.ToString(), DefaultPartitions.UserDocuments);
+                await Data.DeleteAsync<TrackingLink>(trackingLink.Id, DefaultPartitions.UserDocuments);
                 return true;
             }
             catch (Exception ex)
