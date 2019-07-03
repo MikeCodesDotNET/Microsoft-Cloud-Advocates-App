@@ -24,11 +24,11 @@ The app is powered by Visual Studio App Center which provides Build, UI Testing,
 ---
 
 ## Talks 
-
+* TBC 
 ### Coming Up
-* [Leeds Sharp - Leeds, UK](https://www.meetup.com/Leeds-Sharp/)
 
 ### Previous
+* [Leeds Sharp - Leeds, UK](https://www.meetup.com/Leeds-Sharp/)
 * [Xamarin Experts Day - Munich, Germany](https://expertday.forxamarin.com/)
 
 ---
