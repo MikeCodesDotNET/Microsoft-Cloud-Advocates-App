@@ -3,7 +3,6 @@
  xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-    xmlns:converters="using:LXLibrary.Converters"
     xmlns:ioc="clr-namespace:Prism.Ioc;assembly=Prism.Forms"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"

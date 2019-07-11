@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using FFImageLoading.Forms.Platform;
 using Foundation;
 using Microsoft.AppCenter.Push;
 using Prism.Events;
 using Prism.Ioc;
-using Prism.Navigation;
 using UIKit;
 using Unity;
 using UserNotifications;
 using Xamarin;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
 
 namespace Advocates.iOS
 {
@@ -40,6 +36,7 @@ namespace Advocates.iOS
             Rg.Plugins.Popup.Popup.Init();
 
             global::Xamarin.Forms.Forms.Init();
+            AiForms.Renderers.iOS.SettingsViewInit.Init();
             FormsMaps.Init();
 
             CachedImageRenderer.Init();

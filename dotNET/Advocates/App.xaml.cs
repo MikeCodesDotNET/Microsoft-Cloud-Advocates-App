@@ -24,7 +24,6 @@ using Advocates.ViewModels;
 
 namespace Advocates
 {
-    [XamlCompilation (XamlCompilationOptions.Compile)]
     public partial class App : PrismApplication
     {
         public App(IPlatformInitializer initializer = null) : base(initializer) { }
@@ -32,14 +31,13 @@ namespace Advocates
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            
 
             //Init App Center Data!  
             AppCenter.Start(Helpers.Constants.AppCenterApiKey,
                     typeof(Data), typeof(Analytics), typeof(Crashes), typeof(Push), typeof(Distribute), typeof(Auth));
 
             INavigationResult result; 
-            result = await NavigationService.NavigateAsync($"TabbedPage?{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|RssFeedPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|AdvocatesPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|TrackingLinksPage&{KnownNavigationParameters.CreateTab}=NavigationPage|SignInPage");
+            result = await NavigationService.NavigateAsync($"TabbedPage?{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|RssFeedPage&{KnownNavigationParameters.CreateTab}=LargeTextNavigationPage|AdvocatesPage&{KnownNavigationParameters.CreateTab}=NavigationPage|SignInPage");
       
 
 
@@ -64,6 +62,7 @@ namespace Advocates
             containerRegistry.Register(typeof(AdvocatesDataService));
             containerRegistry.Register(typeof(TrackingLinkDataService));
             containerRegistry.RegisterInstance(typeof(UserDataService));
+            containerRegistry.RegisterInstance(typeof(ImmersiveReaderService));
 
             //Navigation Pages
             containerRegistry.RegisterForNavigation<TabbedPage>();
@@ -82,11 +81,15 @@ namespace Advocates
             containerRegistry.RegisterForNavigationOnIdiom<RssFeedPage, RssFeedPageViewModel>(desktopView: typeof(RssFeedPage),
                                                                             tabletView: typeof(RssFeedPageTablet));
 
+            containerRegistry.RegisterForNavigation<ImmersiveReaderPage>();
 
 
             containerRegistry.RegisterForNavigation<FavouritesPage>();
             containerRegistry.RegisterForNavigation<SignInPage>();
             containerRegistry.RegisterForNavigation<NewUserPage>();
+
+            containerRegistry.RegisterForNavigation<SettingsPage>();
+
 
             ContainerRegistry = containerRegistry;
         }

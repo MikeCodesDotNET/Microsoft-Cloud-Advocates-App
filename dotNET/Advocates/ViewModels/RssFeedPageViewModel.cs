@@ -35,8 +35,6 @@ namespace Advocates.ViewModels
             set
             {
                 SetProperty(ref selectedBlogPost, value);
-                if(value != null)
-                    Xamarin.Essentials.Browser.OpenAsync(value.Url);
             }
         }
 
@@ -70,10 +68,10 @@ namespace Advocates.ViewModels
 
 
         //Commands 
-        public DelegateCommand BlogPostSelectedCommand { get; set; }
+        public DelegateCommand<BlogPost> BlogPostSelectedCommand { get; set; }
         public DelegateCommand RefreshCommand { get; set; }
         public DelegateCommand SearchIconClickedCommand { get; set; }
-
+        public DelegateCommand SearchCommand { get; set; }
 
         public RssFeedPageViewModel(INavigationService navigationService, BlogFeedDataService blogFeedDataService, UserDataService userDataService, IEventAggregator eventAggregator)
         {
@@ -81,6 +79,7 @@ namespace Advocates.ViewModels
             this.blogFeedDataService = blogFeedDataService;
             this.userDataService = userDataService;
             this.eventAggregator = eventAggregator;
+            this.SearchCommand = new DelegateCommand(Search);
 
             this.eventAggregator.GetEvent<Helpers.NewBlogPostEvent>().Subscribe(Refresh);
 
@@ -115,6 +114,8 @@ namespace Advocates.ViewModels
 
                 
             }
+
+            BlogPostSelectedCommand = new DelegateCommand<BlogPost>(BlogPostSelected);
         }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
@@ -135,12 +136,6 @@ namespace Advocates.ViewModels
             }
         }
 
-
-        private async void BlogPostSelected(BlogPost selectedBlogPost)
-        {
-            await Xamarin.Essentials.Browser.OpenAsync(selectedBlogPost.Url);
-        }
-
         private void Search()
         {
             if (string.IsNullOrEmpty(searchText))
@@ -155,6 +150,23 @@ namespace Advocates.ViewModels
             }
         }
 
+
+        private async void BlogPostSelected(BlogPost post)
+        {
+            await Xamarin.Essentials.Browser.OpenAsync(post.Url);
+        }
+
+        private async void NavigateToImmersiveReader()
+        {
+            var parameters = new NavigationParameters
+            {
+                { "blogPost", selectedBlogPost }
+            };
+
+            await navigationService.NavigateAsync("ImmersiveReaderPage", parameters);
+        }
+
+
         private async void Refresh()
         {
             await RefreshData(false, true);
@@ -164,8 +176,11 @@ namespace Advocates.ViewModels
         {
             IsRefreshing = !backgroundRefresh;
 
-            if(Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.None)
-                Filtered = new ObservableRangeCollection<BlogPost>(await blogFeedDataService.GetPosts());
+            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.None)
+            {
+                blogPosts = new ObservableRangeCollection<BlogPost>(await blogFeedDataService.GetPosts());
+                Filtered = new ObservableRangeCollection<BlogPost>(blogPosts);
+            }
 
             IsRefreshing = false;
         }

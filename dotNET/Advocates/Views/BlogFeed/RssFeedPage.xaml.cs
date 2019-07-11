@@ -18,9 +18,9 @@ namespace Advocates.Views
         public void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var context = (RssFeedPageViewModel) this.BindingContext;
-            context.SelectedBlogPost = e.CurrentSelection.FirstOrDefault() as BlogPost;
+            //context.SelectedBlogPost = e.CurrentSelection.FirstOrDefault() as BlogPost;
 
-            blogCollectionView.SelectedItem = null;
+            //blogCollectionView.SelectedItem = null;
         }
     }
 }

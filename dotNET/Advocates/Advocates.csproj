@@ -32,6 +32,9 @@
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
     <PackageReference Include="Prism.Plugin.Popups" Version="2.2.0.293" />
     <PackageReference Include="Polly" Version="7.1.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.8" />
+    <PackageReference Include="AiForms.SettingsView" Version="0.5.2" />
+    <PackageReference Include="Xamarin.HotReload" Version="1.4.12" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

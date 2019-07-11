@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sv="clr-namespace:AiForms.Renderers;assembly=SettingsView"
+    Title="Settings"
+    x:Class="Advocates.Views.SettingsPage">
+    <sv:SettingsView HasUnevenRows="true">
+    
+         <sv:Section Title="Accessibility" FooterText="" IsVisible="{Binding SctionIsVisible}">
+               <sv:SwitchCell Title="Light Theme" On="true" />
+               <sv:SwitchCell Title="Immersive Reader" On="true" />
+        </sv:Section>
+
+         <sv:Section Title="Notifications" FooterText="" IsVisible="{Binding SctionIsVisible}">
+               <sv:SwitchCell Title="Blog Posts" On="true" />
+               <sv:SwitchCell Title="New Advocates" On="true" />
+        </sv:Section>
+
+        <sv:Section Title="Links" FooterText="" IsVisible="{Binding SctionIsVisible}">
+              <sv:ButtonCell Title="Github Repository" TitleColor="{StaticResource TextColor}"
+                 TitleAlignment="Center" Command="{Binding SectionToggleCommand}" />
+            <sv:ButtonCell Title="Development Blog" TitleColor="{StaticResource TextColor}"
+                 TitleAlignment="Center" Command="{Binding SectionToggleCommand}" />
+        </sv:Section>
+    
+    </sv:SettingsView>
+</ContentPage>

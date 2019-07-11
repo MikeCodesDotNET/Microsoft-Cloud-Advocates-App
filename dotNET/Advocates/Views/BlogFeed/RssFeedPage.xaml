@@ -1,28 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
-     xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
     xmlns:converters="using:LXLibrary.Converters"
     xmlns:ioc="clr-namespace:Prism.Ioc;assembly=Prism.Forms"
-    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="Blog Posts"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffimagetransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     ios:Page.UseSafeArea="true"
     ios:Page.LargeTitleDisplay="Never"
     x:Class="Advocates.Views.RssFeedPage"
     BackgroundColor="White"
     x:Name="rssFeedPage"
     IconImageSource="Tabbar_RSS.png"
-    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Search" Command="{Binding SearchIconClickedCommand}" IconImageSource="Search.png">
+        <ToolbarItem Text="Search " Command="{Binding SearchIconClickedCommand}" IconImageSource="Search.png">
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-       
+            <ListView 
+            AutomationId="advocatesListView"
+            ItemsSource="{Binding Filtered}" 
+            BackgroundColor="Transparent" 
+            HasUnevenRows="true"
+            RowHeight="80"
+            SeparatorVisibility="None"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+            SelectedItem="{Binding SelectedBlogPost}"
+            RefreshCommand="{Binding RefreshCommand}">
+            
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="ItemTapped"
+                                                  EventArgsParameterPath="Item"
+                                                  Command="{Binding BindingContext.BlogPostSelectedCommand,
+                                                  Source={x:Reference rssFeedPage}}" />
+            </ListView.Behaviors>
+        
+        <ListView.Header>
+            <Grid>
+                <SearchBar 
+                    x:Name="searchBar"
+                    AutomationId="searchBar"
+                    Style="{StaticResource SearchBarStyle}"
+                    SearchCommand="{Binding SearchCommand}"
+                    Text="{Binding SearchText}"
+                    IsSpellCheckEnabled="false"
+                    Placeholder="Search">
+                        <SearchBar.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="TextChanged"
+                                                  Command="{Binding BindingContext.SearchCommand,
+                                                  Source={x:Reference rssFeedPage}}" />
+                        </SearchBar.Behaviors>
+                </SearchBar>
+            </Grid>
+        </ListView.Header>
+        
+        <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid 
+                            BackgroundColor="{StaticResource BackgroundColorItem}"
+                            ColumnSpacing="0">
+                            
+                            <Grid.RowDefinitions>                                
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="115" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                         
+                                 
+                                <ffimageloading:CachedImage
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    HeightRequest="100"
+                                    WidthRequest="100"
+                                    Margin="8"
+                                    CacheType="Disk"
+                                    Aspect="AspectFit" 
+                                    Source="{Binding PrimaryImage.ContentUrl}">
+                                    <ffimageloading:CachedImage.Transformations>
+                                        <fftransformations:RoundedTransformation>
+                                             <x:Arguments>
+                                                <x:Double>30</x:Double>
+                                                <x:Double>30</x:Double>
+                                                <x:Double>30</x:Double>
+                                                <x:Double>6</x:Double>
+                                                <x:String>#2E2E2E</x:String>
+                                            </x:Arguments>
+                                        </fftransformations:RoundedTransformation>
+                                    </ffimageloading:CachedImage.Transformations>
+                                </ffimageloading:CachedImage>
+                     
+                            <StackLayout 
+                                Grid.Column="1"
+                                Spacing="0"
+                                VerticalOptions="Center"
+                                Padding="6,14">
+                                
+                                <Label 
+                                    x:Name="lblName"
+                                    AutomationId="lblName"
+                                    Margin="0,0,5,0"
+                                    VerticalTextAlignment="Center"
+                                    FontFamily="Poppins SemiBold"
+                                    TextColor="#2E2E2E"
+                                    FontSize="13"
+                                    Text="{Binding Title}" 
+                                    LineBreakMode="WordWrap"
+                                    MaxLines="2"/>
+
+                                <Label 
+                                    VerticalTextAlignment="End"
+                                    Margin="0,4,0,4"
+                                    FontFamily="Poppins SemiBold"
+                                    TextColor="{StaticResource AccentColor}"
+                                    FontSize="11"
+                                    Text="{Binding Source}" 
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"/>
+
+                            </StackLayout>
+
+                   
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+    </ListView>
+        
+
+        <!--
         <CollectionView
             x:Name="blogCollectionView"
             ItemsSource="{Binding Filtered}"
@@ -93,6 +212,9 @@
             </CollectionView.ItemTemplate>
           
         </CollectionView>
+        -->
+
+
   
     </ContentPage.Content>
 </ContentPage>

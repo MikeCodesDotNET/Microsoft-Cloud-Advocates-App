@@ -29,6 +29,10 @@ namespace Advocates.Models
         public DateTime PublishedDate { get; set; }
 
 
+        [JsonProperty("source")]
+        public string Source { get; set; }
+
+
     }
 
     public partial class PrimaryImage
