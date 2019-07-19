@@ -11,7 +11,7 @@ import UIKit
 private let minimumHitArea = CGSize(width: 44, height: 44)
 
 extension UIButton {
-    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         // if the button is hidden/disabled/transparent it can't be hit
         if self.isHidden || !self.isUserInteractionEnabled || self.alpha < 0.01 { return nil }
         

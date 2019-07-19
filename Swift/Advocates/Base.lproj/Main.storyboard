@@ -108,7 +108,7 @@
                     <navigationItem key="navigationItem" title="Blog Posts" id="Irv-mh-Oo2">
                         <barButtonItem key="rightBarButtonItem" title="Search" image="Search" id="79c-si-vrc">
                             <connections>
-                                <segue destination="JZX-vN-B97" kind="presentation" id="bUY-CI-c8g"/>
+                                <action selector="searchButtonTapped:" destination="41x-LM-kAu" id="KL9-z0-pc8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -235,7 +235,7 @@
         <!--Search Rss Feed View Controller-->
         <scene sceneID="XGH-dH-FmD">
             <objects>
-                <viewController id="JZX-vN-B97" customClass="SearchRssFeedViewController" customModule="Advocates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchRssFeed" id="JZX-vN-B97" customClass="SearchRssFeedViewController" customModule="Advocates" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Njc-v5-33n">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

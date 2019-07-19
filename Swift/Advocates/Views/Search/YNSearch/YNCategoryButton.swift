@@ -14,8 +14,8 @@ public enum CategoryButtonType {
     case colorful
 }
 
-open class YNCategoryButton: UIButton {
-    open var type: CategoryButtonType? {
+class YNCategoryButton: UIButton {
+    var type: CategoryButtonType? {
         didSet {
             guard let _type = type else { return }
             self.setType(type: _type)
@@ -31,7 +31,7 @@ open class YNCategoryButton: UIButton {
         super.init(coder: aDecoder)
     }
     
-    override open var isHighlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
             if let type = self.type {
                 switch type {
@@ -64,17 +64,17 @@ open class YNCategoryButton: UIButton {
             }
         }
     }
-    open func initVIew() {
+    func initVIew() {
         self.layer.borderColor = UIColor.darkGray.cgColor
         self.layer.borderWidth = 1
-        self.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
+        self.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 12)
         self.setTitleColor(UIColor.darkGray, for: .normal)
         self.setTitleColor(UIColor.lightGray, for: .highlighted)
-        self.layer.cornerRadius = self.frame.height * 0.1
+        self.layer.cornerRadius = self.frame.height * 0.3
 
     }
     
-    open func setType(type: CategoryButtonType) {
+    func setType(type: CategoryButtonType) {
         switch type {
         case .background:
             self.layer.borderColor = nil
@@ -100,7 +100,7 @@ open class YNCategoryButton: UIButton {
         
     }
     
-    open func randomColor() -> UIColor {
+    func randomColor() -> UIColor {
         let colorArray = ["007AFF", "FDCA40", "D11149", "F17105", "541388", "93C0A4", "FF7733", "F85A3E", "FDB833", "FFD07B", "EE4266"]
         
         let randomNumber = arc4random_uniform(UInt32(colorArray.count))

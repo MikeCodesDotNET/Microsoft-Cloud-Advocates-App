@@ -9,7 +9,7 @@
 import Foundation
 import SafariServices
 import UIKit
-
+import SPStorkController
 import Kingfisher
 
 class RssFeedViewController : UITableViewController, UIViewControllerPreviewingDelegate {
@@ -58,8 +58,15 @@ class RssFeedViewController : UITableViewController, UIViewControllerPreviewingD
                 self.tableView.reloadData()
             }
         })
+        
+        
     }
     
+    @IBAction func searchButtonTapped(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "SearchRssFeed")
+        
+        presentAsStork(vc!)
+    }
     
     // MARK: - UITableViewController Overrides
     override func numberOfSections(in tableView: UITableView) -> Int {

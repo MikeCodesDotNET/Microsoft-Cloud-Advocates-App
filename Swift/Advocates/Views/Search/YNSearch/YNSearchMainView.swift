@@ -7,29 +7,28 @@
 //
 
 import UIKit
-
-open class YNSearchMainView: UIView {
+ class YNSearchMainView: UIView {
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
 
-    open var categoryLabel: UILabel!
-    open var ynCategoryButtons = [YNCategoryButton]()
+    var categoryLabel: UILabel!
+    var ynCategoryButtons = [YNCategoryButton]()
     
-    open var searchHistoryLabel: UILabel!
-    open var ynSearchHistoryViews = [YNSearchHistoryView]()
-    open var ynSearchHistoryButtons = [YNSearchHistoryButton]()
-    open var clearHistoryButton: UIButton!
+    var searchHistoryLabel: UILabel!
+    var ynSearchHistoryViews = [YNSearchHistoryView]()
+    var ynSearchHistoryButtons = [YNSearchHistoryButton]()
+    var clearHistoryButton: UIButton!
 
     
     var margin: CGFloat = 22
-    open var delegate: YNSearchMainViewDelegate?
+    var delegate: SearchMainViewDelegate?
     
-    open var ynSearch = YNSearch()
+    var ynSearch = Search()
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
-        guard let categories = YNSearch.shared.getCategories() else { return }
+        guard let categories = Search.shared.getCategories() else { return }
         self.initView(categories: categories)
     }
     
@@ -38,34 +37,34 @@ open class YNSearchMainView: UIView {
     }
     
     
-    open func setYNCategoryButtonType(type: CategoryButtonType) {
+    func setYNCategoryButtonType(type: CategoryButtonType) {
         for ynCategoryButton in self.ynCategoryButtons {
             ynCategoryButton.type = type
         }
     }
     
-    @objc open func ynCategoryButtonClicked(_ sender: UIButton) {
+    @objc func ynCategoryButtonClicked(_ sender: UIButton) {
         guard let text = ynCategoryButtons[sender.tag].titleLabel?.text else { return }
-        ynSearch.appendSearchHistories(value: text)
+        searchService.appendSearchHistories(value: text)
         self.delegate?.ynCategoryButtonClicked(text: text)
     }
     
-    @objc open func ynSearchHistoryButtonClicked(_ sender: UIButton) {
+    @objc func ynSearchHistoryButtonClicked(_ sender: UIButton) {
         guard let text = ynSearchHistoryButtons[sender.tag].textLabel.text else { return }
         self.delegate?.ynSearchHistoryButtonClicked(text: text)
     }
     
-    @objc open func clearHistoryButtonClicked() {
-        ynSearch.setSearchHistories(value: [String]())
+    @objc func clearHistoryButtonClicked() {
+        searchService.setSearchHistories(value: [String]())
         self.redrawSearchHistoryButtons()
     }
     
-    @objc open func closeButtonClicked(_ sender: UIButton) {
-        ynSearch.deleteSearchHistories(index: sender.tag)
+    @objc func closeButtonClicked(_ sender: UIButton) {
+        searchService.deleteSearchHistories(index: sender.tag)
         self.redrawSearchHistoryButtons()
     }
     
-    open func initView(categories: [String]) {
+    func initView(categories: [String]) {
         self.categoryLabel = UILabel(frame: CGRect(x: margin, y: 0, width: width - 40, height: 50))
         self.categoryLabel.text = "Categories"
         self.categoryLabel.font = UIFont(name: "Avenir-Heavy", size: 14)
@@ -105,7 +104,7 @@ open class YNSearchMainView: UIView {
         
     }
     
-    open func redrawSearchHistoryButtons() {
+    func redrawSearchHistoryButtons() {
         for ynSearchHistoryView in ynSearchHistoryViews {
             ynSearchHistoryView.removeFromSuperview()
         }
@@ -116,7 +115,7 @@ open class YNSearchMainView: UIView {
             self.clearHistoryButton.removeFromSuperview()
         }
         
-        let histories = ynSearch.getSearchHistories() ?? [String]()
+        let histories = searchService.getSearchHistories() ?? [String]()
         
         let searchHistoryLabelOriginY: CGFloat = searchHistoryLabel.frame.origin.y + searchHistoryLabel.frame.height
 
@@ -145,4 +144,6 @@ open class YNSearchMainView: UIView {
         
         self.delegate?.ynSearchMainViewSearchHistoryChanged()
     }
+    
+    let searchService = SearchService.init(indexName: "blog-posts")
 }

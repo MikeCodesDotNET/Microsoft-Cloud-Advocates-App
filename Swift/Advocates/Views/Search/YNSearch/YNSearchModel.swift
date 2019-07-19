@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class YNSearchModel {
+class YNSearchModel {
     public init(key: String) {
         self.key = key
     }

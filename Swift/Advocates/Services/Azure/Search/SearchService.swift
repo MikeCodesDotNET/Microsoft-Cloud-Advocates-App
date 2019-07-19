@@ -8,21 +8,22 @@
 
 import Foundation
 import UIKit
-import Alamofire
 
 class SearchService {
     
-    private let session = Alamofire.Session()
-    
+    private var pref: UserDefaults!
     private let baseUrl: String
     private let apiVersion = "2019-05-06"
     
     
     init(indexName: String) {
         
+        pref = UserDefaults.standard
         self.baseUrl = "https://" + Constants.AzureSearch.serviceName + ".search.windows.net/indexes/" + indexName
     }
     
+    
+    // MARK: - Azure Search HTTP API
     
     func suggest(query: String, completion: @escaping ([SearchResult]) -> Void) {
     
@@ -121,6 +122,35 @@ class SearchService {
         task.resume()
     }
     
+    
+    
+    // MARK: - Search History
+    
+    func setSearchHistories(value: [String]) {
+        pref.set(value, forKey: "histories")
+    }
+    
+    func deleteSearchHistories(index: Int) {
+        guard var histories = pref.object(forKey: "histories") as? [String] else { return }
+        histories.remove(at: index)
+        
+        pref.set(histories, forKey: "histories")
+    }
+    
+    func appendSearchHistories(value: String) {
+        var histories = [String]()
+        if let _histories = pref.object(forKey: "histories") as? [String] {
+            histories = _histories
+        }
+        histories.append(value)
+        pref.set(histories, forKey: "histories")
+    }
+    
+    func getSearchHistories() -> [String]? {
+        guard let histories = pref.object(forKey: "histories") as? [String] else { return nil }
+        return histories
+    }
+    
 }
 
 
@@ -152,14 +182,16 @@ class SearchResultWrapper : Codable {
 class SearchResult : Codable {
     
     let searchScore: Double?
+    let searchText: String?
     let id: String
     let title: String
     let valueDescription: String
     let source: String
     let url: String
     
-    init(searchScore: Double, id: String, title: String, valueDescription: String, source: String, url: String) {
+    init(searchScore: Double, searchText: String, id: String, title: String, valueDescription: String, source: String, url: String) {
         self.searchScore = searchScore
+        self.searchText = searchText
         self.id = id
         self.title = title
         self.valueDescription = valueDescription
@@ -169,6 +201,7 @@ class SearchResult : Codable {
     
     enum CodingKeys: String, CodingKey {
         case searchScore = "@search.score"
+        case searchText = "@search.text"
         case id = "id"
         case title = "title"
         case valueDescription = "description"

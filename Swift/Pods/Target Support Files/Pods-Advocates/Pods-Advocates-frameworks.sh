@@ -161,18 +161,18 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SPStorkController/SPStorkController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SPStorkController/SPStorkController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi

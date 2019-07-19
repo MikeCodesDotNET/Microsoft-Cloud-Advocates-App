@@ -9,27 +9,33 @@
 import Foundation
 import UIKit
 
-class SearchRssFeedViewController : SearchViewController, YNSearchDelegate {
+class SearchRssFeedViewController : SearchViewController, SearchDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let demoCategories = ["App Services", "AKS", "Cognitive Services", "AI", "Storage", "Analytics", "SQL", "Cosmos DB", "DevOps", "Networking", "Migration", "Data", "SDK", "VM"]
+        let demoCategories = ["AI & ML", "Analytics", "Azure Stack", "Blockchain", "Compute", "Containers", "Databases", "Developer Tools", "DevOps", "Identity", "Integration", "IoT", "Media", "Migration", "Mixed Reality", "Mobile", "Networking", "Security", "Storage", "Web"]
+        
+        
+        
         let demoSearchHistories = ["Menu", "Animation", "Transition", "TableView"]
         
-        let ynSearch = YNSearch()
+        let ynSearch = Search()
         ynSearch.setCategories(value: demoCategories)
-        ynSearch.setSearchHistories(value: demoSearchHistories)
+        searchService.setSearchHistories(value: demoSearchHistories)
         
         self.ynSearchinit()
         
         self.delegate = self
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        let database1 = YNDropDownMenu(key: "YNDropDownMenu")
-        let database2 = YNSearchData(key: "YNSearchData")
-        let database3 = YNExpandableCell(key: "YNExpandableCell")
+        
+        let database1 = YNDropDownMenu(key: "DropDownMenu")
+        let database2 = YNSearchData(key: "SearchData")
+        let database3 = YNExpandableCell(key: "ExpandableCell")
         let demoDatabase = [database1, database2, database3]
+        
+        
         
         self.initData(database: demoDatabase)
         self.setYNCategoryButtonType(type: .colorful)
@@ -41,8 +47,8 @@ class SearchRssFeedViewController : SearchViewController, YNSearchDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func ynSearchListViewDidScroll() {
-        self.SearchTextfieldView.ynSearchTextField.endEditing(true)
+    func searchListViewDidScroll() {
+        self.searchTextfieldView.searchTextField.endEditing(true)
     }
     
     
@@ -52,34 +58,102 @@ class SearchRssFeedViewController : SearchViewController, YNSearchDelegate {
     }
     
     func ynCategoryButtonClicked(text: String) {
-        self.pushViewController(text: text)
+        //self.pushViewController(text: text)
+        
+        
+        
         print(text)
     }
     
-    func ynSearchListViewClicked(key: String) {
+    func searchListViewClicked(key: String) {
         self.pushViewController(text: key)
         print(key)
     }
     
-    func ynSearchListViewClicked(object: Any) {
+    func searchListViewClicked(object: Any) {
         print(object)
     }
     
-    func ynSearchListView(_ ynSearchListView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.SearchView.ynSearchListView.dequeueReusableCell(withIdentifier: YNSearchListViewCell.ID) as! YNSearchListViewCell
-        if let ynmodel = self.SearchView.ynSearchListView.searchResultDatabase[indexPath.row] as? YNSearchModel {
-            cell.searchLabel.text = ynmodel.key
+    func searchListView(_ ynSearchListView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.searchView.suggestionsListView.dequeueReusableCell(withIdentifier: SearchSuggestionListViewCell.ID) as! SearchSuggestionListViewCell
+        if let searchResult = self.searchView.suggestionsListView.searchResultDatabase[indexPath.row] as? SearchResult {
+            cell.searchResult = searchResult
+            
+            let cmp = searchResult.searchText
+      
+            if(cmp?.contains("[") == true) {
+                cell.searchLabel.attributedText = hitHighlightText(searchText: searchResult.searchText!)
+            } else {
+                cell.searchLabel.text = searchResult.searchText
+            }
         }
         
         return cell
     }
     
-    func ynSearchListView(_ ynSearchListView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let ynmodel = self.SearchView.ynSearchListView.searchResultDatabase[indexPath.row] as? YNSearchModel, let key = ynmodel.key {
-            self.SearchView.ynSearchListView.ynSearchListViewDelegate?.ynSearchListViewClicked(key: key)
-            self.SearchView.ynSearchListView.ynSearchListViewDelegate?.ynSearchListViewClicked(object: self.SearchView.ynSearchListView.database[indexPath.row])
-            self.SearchView.ynSearchListView.ynSearch.appendSearchHistories(value: key)
+    func searchListView(_ ynSearchListView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let ynmodel = self.searchView.suggestionsListView.searchResultDatabase[indexPath.row] as? YNSearchModel, let key = ynmodel.key {
+            self.searchView.suggestionsListView.searchListViewDelegate?.searchListViewClicked(key: key)
+            self.searchView.suggestionsListView.searchListViewDelegate?.searchListViewClicked(object: self.searchView.suggestionsListView.database[indexPath.row])
+            searchService.appendSearchHistories(value: key)
         }
+    }
+    
+    
+    func hitHighlightText(searchText: String) -> NSMutableAttributedString{
+        
+        var hitAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Avenir-Black", size: 15)!]
+        var defaultAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray]
+        
+        var attributedString: NSMutableAttributedString?
+        
+        if(searchText.hasPrefix("[")){
+            //its first
+            var spl = searchText.split(separator: "]")
+            var hit = spl[0].dropFirst(1)
+            var remaining = spl[1]
+            
+            
+            let hitString = NSMutableAttributedString(string: String(hit), attributes: hitAttributes)
+            let defaultString = NSAttributedString(string: String(remaining), attributes: defaultAttributes)
+            
+            hitString.append(defaultString)
+            return hitString
+            
+        } else if(searchText.last == ("]")){
+            //its first
+            var frt = searchText.split(separator: "[")
+            var remaining = frt[0]
+            var hit = frt[1].dropLast()
+            
+            let defaultString = NSMutableAttributedString(string: String(remaining), attributes: defaultAttributes)
+            
+            let hitString = NSAttributedString(string: String(hit), attributes: hitAttributes)
+            
+            defaultString.append(hitString)
+            return defaultString
+        } else {
+            
+            var one = searchText.split(separator: "[")
+            let preText = one[0]
+            let hitPostText = one[1]
+            
+            
+            let hitPostSplit = hitPostText.split(separator: "]")
+            let hit = hitPostSplit[0]
+            let postText = hitPostSplit[1]
+            
+            
+            let preTextString = NSMutableAttributedString(string: String(preText), attributes: defaultAttributes)
+            let hitString = NSAttributedString(string: String(hit), attributes: hitAttributes)
+            let postTextString = NSAttributedString(string: String(postText), attributes: defaultAttributes)
+            
+            preTextString.append(hitString)
+            preTextString.append(postTextString)
+            return preTextString
+        }
+
+        
     }
     
     func pushViewController(text:String) {

@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (5.0.0-beta.6)
   - AppCenter (2.2.0):
     - AppCenter/Analytics (= 2.2.0)
     - AppCenter/Crashes (= 2.2.0)
@@ -23,9 +22,9 @@ PODS:
     - SnapKit (~> 5.0.0)
   - SkeletonView (1.7)
   - SnapKit (5.0.0)
+  - SPStorkController (1.7.6)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.0.0-beta.5)
   - AppCenter
   - AppCenter/Analytics
   - AppCenter/Auth
@@ -36,26 +35,27 @@ DEPENDENCIES:
   - Kingfisher (~> 5.0)
   - NotificationBannerSwift
   - SkeletonView
+  - SPStorkController
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
     - AppCenter
     - Kingfisher
     - MarqueeLabel
     - NotificationBannerSwift
     - SkeletonView
     - SnapKit
+    - SPStorkController
 
 SPEC CHECKSUMS:
-  Alamofire: cd08a4402bd12cacd0c66f23fb12fec8d6b965e4
   AppCenter: c809e69d93218b9861b4f8e54ded8dcf4d2131e7
   Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   MarqueeLabel: b55b26e690b6ad41faedd95cbf5eae6f1d1735b4
   NotificationBannerSwift: 1e914a69fe5adbf1d39231a3605a9203fdc9c674
   SkeletonView: 7d7378731b708f8a6e6b1ffefb68cc3903f10a03
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
+  SPStorkController: 6d0d0716a4e9e8245aa80715ffc57491b428569e
 
-PODFILE CHECKSUM: 29765ab86b8c7e4e8fc1873d506430d0ae3800b4
+PODFILE CHECKSUM: 5e30334341a48e2cf8133897e05abb27153b9e58
 
 COCOAPODS: 1.7.1

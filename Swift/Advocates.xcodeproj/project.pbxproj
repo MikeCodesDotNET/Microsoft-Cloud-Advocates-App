@@ -22,20 +22,21 @@
 		9C64CEFB22E0C25B00C94F9B /* LinkOpenerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CEFA22E0C25B00C94F9B /* LinkOpenerService.swift */; };
 		9C64CF0C22E0CE4D00C94F9B /* YNSearchHistoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CEFE22E0CE4B00C94F9B /* YNSearchHistoryButton.swift */; };
 		9C64CF0D22E0CE4D00C94F9B /* YNCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CEFF22E0CE4B00C94F9B /* YNCategoryButton.swift */; };
-		9C64CF0E22E0CE4D00C94F9B /* YNSearchListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0022E0CE4B00C94F9B /* YNSearchListViewCell.swift */; };
+		9C64CF0E22E0CE4D00C94F9B /* SearchSuggestionListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0022E0CE4B00C94F9B /* SearchSuggestionListViewCell.swift */; };
 		9C64CF0F22E0CE4D00C94F9B /* YNSearchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0122E0CE4B00C94F9B /* YNSearchExtension.swift */; };
 		9C64CF1022E0CE4D00C94F9B /* YNSearchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0322E0CE4B00C94F9B /* YNSearchMainView.swift */; };
 		9C64CF1122E0CE4D00C94F9B /* YNSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0422E0CE4B00C94F9B /* YNSearchView.swift */; };
-		9C64CF1222E0CE4D00C94F9B /* YNSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0522E0CE4C00C94F9B /* YNSearch.swift */; };
+		9C64CF1222E0CE4D00C94F9B /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0522E0CE4C00C94F9B /* Search.swift */; };
 		9C64CF1322E0CE4D00C94F9B /* YNSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0622E0CE4C00C94F9B /* YNSearchTextField.swift */; };
 		9C64CF1422E0CE4D00C94F9B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0722E0CE4C00C94F9B /* SearchViewController.swift */; };
-		9C64CF1522E0CE4D00C94F9B /* YNSearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0822E0CE4C00C94F9B /* YNSearchListView.swift */; };
+		9C64CF1522E0CE4D00C94F9B /* SearchSuggestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0822E0CE4C00C94F9B /* SearchSuggestionsListView.swift */; };
 		9C64CF1622E0CE4D00C94F9B /* YNSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0922E0CE4C00C94F9B /* YNSearchModel.swift */; };
-		9C64CF1722E0CE4D00C94F9B /* YNSearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0A22E0CE4C00C94F9B /* YNSearchDelegate.swift */; };
+		9C64CF1722E0CE4D00C94F9B /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0A22E0CE4C00C94F9B /* SearchDelegate.swift */; };
 		9C64CF1822E0CE4D00C94F9B /* Objectification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF0B22E0CE4D00C94F9B /* Objectification.swift */; };
 		9C64CF1A22E0CEBA00C94F9B /* SearchRssFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF1922E0CEBA00C94F9B /* SearchRssFeedViewController.swift */; };
 		9C64CF1F22E1BF3E00C94F9B /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF1E22E1BF3E00C94F9B /* SearchService.swift */; };
 		9C64CF2122E1BF9A00C94F9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF2022E1BF9A00C94F9B /* Constants.swift */; };
+		9C64CF2322E2488C00C94F9B /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C64CF2222E2488C00C94F9B /* AppExtensions.swift */; };
 		9CA5B07A22AF9BC500FF3003 /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5B07922AF9BC500FF3003 /* BlogPost.swift */; };
 		9CD59EC522DF4CA700968AA4 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD59EC422DF4CA700968AA4 /* AccountViewModel.swift */; };
 		9CD59EC822DF504200968AA4 /* GravatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD59EC722DF504200968AA4 /* GravatarService.swift */; };
@@ -65,21 +66,22 @@
 		9C64CEFA22E0C25B00C94F9B /* LinkOpenerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOpenerService.swift; sourceTree = "<group>"; };
 		9C64CEFE22E0CE4B00C94F9B /* YNSearchHistoryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchHistoryButton.swift; sourceTree = "<group>"; };
 		9C64CEFF22E0CE4B00C94F9B /* YNCategoryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCategoryButton.swift; sourceTree = "<group>"; };
-		9C64CF0022E0CE4B00C94F9B /* YNSearchListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchListViewCell.swift; sourceTree = "<group>"; };
+		9C64CF0022E0CE4B00C94F9B /* SearchSuggestionListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSuggestionListViewCell.swift; sourceTree = "<group>"; };
 		9C64CF0122E0CE4B00C94F9B /* YNSearchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchExtension.swift; sourceTree = "<group>"; };
 		9C64CF0222E0CE4B00C94F9B /* YNSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YNSearch.h; sourceTree = "<group>"; };
 		9C64CF0322E0CE4B00C94F9B /* YNSearchMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchMainView.swift; sourceTree = "<group>"; };
 		9C64CF0422E0CE4B00C94F9B /* YNSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchView.swift; sourceTree = "<group>"; };
-		9C64CF0522E0CE4C00C94F9B /* YNSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearch.swift; sourceTree = "<group>"; };
+		9C64CF0522E0CE4C00C94F9B /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		9C64CF0622E0CE4C00C94F9B /* YNSearchTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchTextField.swift; sourceTree = "<group>"; };
 		9C64CF0722E0CE4C00C94F9B /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		9C64CF0822E0CE4C00C94F9B /* YNSearchListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchListView.swift; sourceTree = "<group>"; };
+		9C64CF0822E0CE4C00C94F9B /* SearchSuggestionsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSuggestionsListView.swift; sourceTree = "<group>"; };
 		9C64CF0922E0CE4C00C94F9B /* YNSearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchModel.swift; sourceTree = "<group>"; };
-		9C64CF0A22E0CE4C00C94F9B /* YNSearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchDelegate.swift; sourceTree = "<group>"; };
+		9C64CF0A22E0CE4C00C94F9B /* SearchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		9C64CF0B22E0CE4D00C94F9B /* Objectification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objectification.swift; sourceTree = "<group>"; };
 		9C64CF1922E0CEBA00C94F9B /* SearchRssFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRssFeedViewController.swift; sourceTree = "<group>"; };
 		9C64CF1E22E1BF3E00C94F9B /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		9C64CF2022E1BF9A00C94F9B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9C64CF2222E2488C00C94F9B /* AppExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExtensions.swift; sourceTree = "<group>"; };
 		9CA5B07922AF9BC500FF3003 /* BlogPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
 		9CD59EC222DF4C6200968AA4 /* Advocates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Advocates.entitlements; sourceTree = "<group>"; };
 		9CD59EC422DF4CA700968AA4 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
@@ -178,12 +180,12 @@
 				9C64CF0B22E0CE4D00C94F9B /* Objectification.swift */,
 				9C64CEFF22E0CE4B00C94F9B /* YNCategoryButton.swift */,
 				9C64CF0222E0CE4B00C94F9B /* YNSearch.h */,
-				9C64CF0522E0CE4C00C94F9B /* YNSearch.swift */,
-				9C64CF0A22E0CE4C00C94F9B /* YNSearchDelegate.swift */,
+				9C64CF0522E0CE4C00C94F9B /* Search.swift */,
+				9C64CF0A22E0CE4C00C94F9B /* SearchDelegate.swift */,
 				9C64CF0122E0CE4B00C94F9B /* YNSearchExtension.swift */,
 				9C64CEFE22E0CE4B00C94F9B /* YNSearchHistoryButton.swift */,
-				9C64CF0822E0CE4C00C94F9B /* YNSearchListView.swift */,
-				9C64CF0022E0CE4B00C94F9B /* YNSearchListViewCell.swift */,
+				9C64CF0822E0CE4C00C94F9B /* SearchSuggestionsListView.swift */,
+				9C64CF0022E0CE4B00C94F9B /* SearchSuggestionListViewCell.swift */,
 				9C64CF0322E0CE4B00C94F9B /* YNSearchMainView.swift */,
 				9C64CF0922E0CE4C00C94F9B /* YNSearchModel.swift */,
 				9C64CF0622E0CE4C00C94F9B /* YNSearchTextField.swift */,
@@ -251,6 +253,7 @@
 				9CD59ED022DF72A300968AA4 /* ColourExtensions.swift */,
 				9C64CEEB22E06B9800C94F9B /* AppColours.swift */,
 				9C64CF2022E1BF9A00C94F9B /* Constants.swift */,
+				9C64CF2222E2488C00C94F9B /* AppExtensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -428,23 +431,24 @@
 				9C39257622AF962400BEEAD4 /* AccountViewController.swift in Sources */,
 				9CD59ED122DF72A300968AA4 /* ColourExtensions.swift in Sources */,
 				9C64CEF722E0C15900C94F9B /* TelegramService.swift in Sources */,
+				9C64CF2322E2488C00C94F9B /* AppExtensions.swift in Sources */,
 				9C64CF0F22E0CE4D00C94F9B /* YNSearchExtension.swift in Sources */,
-				9C64CF1722E0CE4D00C94F9B /* YNSearchDelegate.swift in Sources */,
+				9C64CF1722E0CE4D00C94F9B /* SearchDelegate.swift in Sources */,
 				9CD59ECC22DF55D900968AA4 /* AdvocatesViewController.swift in Sources */,
 				9CD59EC822DF504200968AA4 /* GravatarService.swift in Sources */,
-				9C64CF1222E0CE4D00C94F9B /* YNSearch.swift in Sources */,
+				9C64CF1222E0CE4D00C94F9B /* Search.swift in Sources */,
 				9C64CF1422E0CE4D00C94F9B /* SearchViewController.swift in Sources */,
 				9C64CEF122E0C02A00C94F9B /* SocialServiceProtocol.swift in Sources */,
 				9CD59ECE22DF573A00968AA4 /* RssFeedViewModel.swift in Sources */,
 				9CD59ED622DF822000968AA4 /* BlogPostTableViewCell.swift in Sources */,
 				9C64CF1322E0CE4D00C94F9B /* YNSearchTextField.swift in Sources */,
 				9C64CEEC22E06B9800C94F9B /* AppColours.swift in Sources */,
-				9C64CF0E22E0CE4D00C94F9B /* YNSearchListViewCell.swift in Sources */,
+				9C64CF0E22E0CE4D00C94F9B /* SearchSuggestionListViewCell.swift in Sources */,
 				9C64CEEF22E0BF8900C94F9B /* TwitterService.swift in Sources */,
 				9C64CEF322E0C0E100C94F9B /* WhatsAppService.swift in Sources */,
 				9C64CF1122E0CE4D00C94F9B /* YNSearchView.swift in Sources */,
 				9C64CF1A22E0CEBA00C94F9B /* SearchRssFeedViewController.swift in Sources */,
-				9C64CF1522E0CE4D00C94F9B /* YNSearchListView.swift in Sources */,
+				9C64CF1522E0CE4D00C94F9B /* SearchSuggestionsListView.swift in Sources */,
 				9C64CF0C22E0CE4D00C94F9B /* YNSearchHistoryButton.swift in Sources */,
 				9C64CF1F22E1BF3E00C94F9B /* SearchService.swift in Sources */,
 				9C64CF1022E0CE4D00C94F9B /* YNSearchMainView.swift in Sources */,

@@ -18,6 +18,5 @@ target 'Advocates' do
   pod "SkeletonView"
   pod 'Kingfisher', '~> 5.0'
   pod 'NotificationBannerSwift'
-  pod 'Alamofire', '~> 5.0.0-beta.5'
-
+  pod 'SPStorkController'
 end

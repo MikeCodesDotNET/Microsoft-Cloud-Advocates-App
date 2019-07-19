@@ -8,10 +8,10 @@
 
 import UIKit
 
-open class YNSearchHistoryView: UIView {
-    open var ynSearchHistoryButton: YNSearchHistoryButton!
-    open var closeButton: UIButton!
-    open var bottomLine: UIView!
+class YNSearchHistoryView: UIView {
+    var ynSearchHistoryButton: YNSearchHistoryButton!
+    var closeButton: UIButton!
+    var bottomLine: UIView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,12 +23,12 @@ open class YNSearchHistoryView: UIView {
         super.init(coder: aDecoder)
     }
     
-    open func initView() {
+    func initView() {
         self.ynSearchHistoryButton = YNSearchHistoryButton(frame: CGRect(x: 0, y: 0, width: self.frame.width - 15, height: self.frame.height))
         self.addSubview(ynSearchHistoryButton)
         
         self.closeButton = UIButton(frame: CGRect(x: self.frame.width - 15, y: (self.frame.height - 15)/2, width: 15, height: 15))
-        let close = UIImage(named: "close", in: Bundle(for: YNSearch.self), compatibleWith: nil)
+        let close = UIImage(named: "close", in: Bundle(for: Search.self), compatibleWith: nil)
 
         self.closeButton.setImage(close, for: .normal)
         self.addSubview(closeButton)
@@ -40,8 +40,8 @@ open class YNSearchHistoryView: UIView {
     }
 }
 
-open class YNSearchHistoryButton: UIButton {
-    open var textLabel: UILabel!
+ class YNSearchHistoryButton: UIButton {
+    var textLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,7 +53,7 @@ open class YNSearchHistoryButton: UIButton {
         super.init(coder: aDecoder)
     }
 
-    override open var isHighlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
             switch isHighlighted {
             case true:
@@ -64,9 +64,9 @@ open class YNSearchHistoryButton: UIButton {
         }
     }
     
-    open func initView() {
+    func initView() {
         let searchHistoryImageview = UIImageView(frame: CGRect(x: 0, y: (self.frame.height - 15)/2, width: 15, height: 15))
-        let search_history = UIImage(named: "search_history", in: Bundle(for: YNSearch.self), compatibleWith: nil)
+        let search_history = UIImage(named: "search_history", in: Bundle(for: Search.self), compatibleWith: nil)
         searchHistoryImageview.image = search_history
         self.addSubview(searchHistoryImageview)
         

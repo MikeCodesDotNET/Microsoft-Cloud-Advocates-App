@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class YNSearchTextField: UITextField {
+class YNSearchTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -19,12 +19,12 @@ open class YNSearchTextField: UITextField {
         super.init(coder: aDecoder)
     }
     
-    open func initView() {
+    func initView() {
         self.leftViewMode = .always
         
         let searchImageViewWrapper = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 15))
         let searchImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 15, height: 15))
-        let search = UIImage(named: "search", in: Bundle(for: YNSearch.self), compatibleWith: nil)
+        let search = UIImage(named: "search", in: Bundle(for: Search.self), compatibleWith: nil)
         searchImageView.image = search
         searchImageViewWrapper.addSubview(searchImageView)
         
@@ -40,9 +40,9 @@ open class YNSearchTextField: UITextField {
     
 }
 
-open class YNSearchTextFieldView: UIView {
-    open var ynSearchTextField: YNSearchTextField!
-    open var cancelButton: UIButton!
+class YNSearchTextFieldView: UIView {
+    var searchTextField: YNSearchTextField!
+    var cancelButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,11 +54,12 @@ open class YNSearchTextFieldView: UIView {
         super.init(coder: aDecoder)
     }
     
-    open func initView() {
+    func initView() {
         //Original size (allows for cancel)
-        self.ynSearchTextField = YNSearchTextField(frame: CGRect(x: 0, y: 0, width: self.frame.width - 50, height: self.frame.height))
+        self.searchTextField = YNSearchTextField(frame: CGRect(x: 0, y: 0, width: self.frame.width - 50, height: self.frame.height))
+        self.searchTextField.autocorrectionType = UITextAutocorrectionType.no
         
-        self.addSubview(self.ynSearchTextField)
+        self.addSubview(self.searchTextField)
         
         self.cancelButton = UIButton(frame: CGRect(x: self.frame.width - 40, y: 0, width: 50, height: self.frame.height))
         self.cancelButton.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 16)

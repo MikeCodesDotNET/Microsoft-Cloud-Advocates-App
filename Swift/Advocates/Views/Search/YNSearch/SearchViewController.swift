@@ -8,27 +8,28 @@
 
 import UIKit
 
-open class SearchViewController: UIViewController, UITextFieldDelegate {
-    open var delegate: YNSearchDelegate? {
+class SearchViewController: UIViewController, UITextFieldDelegate {
+    var delegate: SearchDelegate? {
         didSet {
-            self.SearchView.delegate = delegate
+            self.searchView.delegate = delegate
         }
     }
     
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     
-    open var SearchTextfieldView: YNSearchTextFieldView!
-    open var SearchView: YNSearchView!
+    var searchTextfieldView: YNSearchTextFieldView!
+    var searchView: YNSearchView!
+    var titleLabel: UILabel!
     
-    open var ynSerach = YNSearch()
+    var ynSerach = Search()
 
-    override open func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
-    override open func viewDidLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         var safeAreaTopInset: CGFloat = 0
@@ -37,101 +38,124 @@ open class SearchViewController: UIViewController, UITextFieldDelegate {
         }
         
         //Called second
-        self.SearchTextfieldView.frame = CGRect(x: 20, y: safeAreaTopInset + 20, width: width - 20, height: 35)
-        self.SearchView.frame = CGRect(x: 0, y: 70 + safeAreaTopInset, width: width, height: height - 70 - safeAreaTopInset)
+        self.searchTextfieldView.frame = CGRect(x: 20, y: safeAreaTopInset + 110, width: width - 20, height: 35)
+        self.searchView.frame = CGRect(x: 0, y: 160 + safeAreaTopInset, width: width, height: height - 70 - safeAreaTopInset)
     }
 
-    open func ynSearchinit() {
+    func ynSearchinit() {
         
         //Called first
-        self.SearchTextfieldView = YNSearchTextFieldView(frame: CGRect(x: 20, y: 20, width: width - 40, height: 35))
-        self.SearchTextfieldView.ynSearchTextField.delegate = self
-        self.SearchTextfieldView.ynSearchTextField.addTarget(self, action: #selector(ynSearchTextfieldTextChanged(_:)), for: .editingChanged)
-        self.SearchTextfieldView.cancelButton.addTarget(self, action: #selector(ynSearchTextfieldcancelButtonClicked), for: .touchUpInside)
+        self.searchTextfieldView = YNSearchTextFieldView(frame: CGRect(x: 20, y: 110, width: width - 40, height: 35))
+        self.searchTextfieldView.searchTextField.delegate = self
+        self.searchTextfieldView.searchTextField.addTarget(self, action: #selector(ynSearchTextfieldTextChanged(_:)), for: .editingChanged)
         
-        self.SearchTextfieldView.ynSearchTextField.clearButtonMode = UITextField.ViewMode.whileEditing
+        self.searchTextfieldView.cancelButton.addTarget(self, action: #selector(ynSearchTextfieldcancelButtonClicked), for: .touchUpInside)
         
-        self.view.addSubview(self.SearchTextfieldView)
+        self.searchTextfieldView.searchTextField.clearButtonMode = UITextField.ViewMode.whileEditing
         
-        self.SearchView = YNSearchView(frame: CGRect(x: 0, y: 70, width: width, height: height - 70))
-        self.view.addSubview(self.SearchView)
+        self.view.addSubview(self.searchTextfieldView)
         
-        //TODO remove this as its jsut for testing
-        let searchService = SearchService.init(indexName: "blog-posts")
-        let results = searchService.search(query: "HDInsight", completion: { documents in
-            for searchResult in documents {
-                print(searchResult.title)
-            }
-        })
+        self.searchView = YNSearchView(frame: CGRect(x: 0, y: 70, width: width, height: height - 70))
+        self.view.addSubview(self.searchView)
         
-        
-        //TODO remove the testing of suggeastions
-        
-        let suggestions = searchService.suggest(query: "HDInsigh", completion: { documents in
-            for searchResult in documents {
-                print(searchResult.title)
-            }
-        })
+        self.titleLabel = UILabel.init(frame: CGRect(x: 20, y: 50, width: width - 40, height: 35))
+        self.titleLabel.font = UIFont(name: "Avenir-Heavy", size: 32)
+        self.titleLabel.text = "Search"
+        self.view.addSubview(self.titleLabel)
         
         
     }
     
-    open func setYNCategoryButtonType(type: CategoryButtonType) {
-        self.SearchView.ynSearchMainView.setYNCategoryButtonType(type: .colorful)
+    func setYNCategoryButtonType(type: CategoryButtonType) {
+        self.searchView.searchMainView.setYNCategoryButtonType(type: .colorful)
     }
     
-    open func initData(database: [Any]) {
-        self.SearchView.ynSearchListView.initData(database: database)
+    func initData(database: [Any]) {
+        self.searchView.suggestionsListView.initData(database: database)
     }
 
     
     // MARK: - YNSearchTextfield
-    @objc open func ynSearchTextfieldcancelButtonClicked() {
-        self.SearchTextfieldView.ynSearchTextField.text = ""
-        self.SearchTextfieldView.ynSearchTextField.endEditing(true)
-        self.SearchView.ynSearchMainView.redrawSearchHistoryButtons()
+    @objc func ynSearchTextfieldcancelButtonClicked() {
+        self.searchTextfieldView.searchTextField.text = ""
+        self.searchTextfieldView.searchTextField.endEditing(true)
+        self.searchView.searchMainView.redrawSearchHistoryButtons()
         
         
         
         UIView.animate(withDuration: 0.3, animations: {
-            self.SearchView.ynSearchMainView.alpha = 1
-            self.SearchTextfieldView.cancelButton.alpha = 0
-            self.SearchView.ynSearchListView.alpha = 0
+            self.searchView.searchMainView.alpha = 1
+            self.searchTextfieldView.cancelButton.alpha = 0
+            self.searchView.suggestionsListView.alpha = 0
         }) { (true) in
-            self.SearchView.ynSearchMainView.isHidden = false
-            self.SearchView.ynSearchListView.isHidden = true
+            self.searchView.searchMainView.isHidden = false
+            self.searchView.suggestionsListView.isHidden = true
         }
         
         self.dismiss(animated: true, completion: {})
         
     }
     @objc open func ynSearchTextfieldTextChanged(_ textField: UITextField) {
-        self.SearchView.ynSearchListView.ynSearchTextFieldText = textField.text
+        
+        let text = textField.text
+        
+        self.searchView.suggestionsListView.searchTextFieldText = text
+        
+        if text == "" {
+            DispatchQueue.main.async {
+                self.searchView.suggestionsListView.searchResultDatabase = [SearchResult]()
+                self.searchView.suggestionsListView.reloadData()
+            }
+            return
+        }
+        
+         self.searchService.suggest(query: text!, completion: { results in
+            DispatchQueue.main.async {
+                self.searchView.suggestionsListView.database = results
+                self.searchView.suggestionsListView.searchResultDatabase = results
+                self.searchView.suggestionsListView.reloadData()
+            }
+            
+         })
     }
     
     // MARK: - UITextFieldDelegate
-    open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text else { return true }
         if !text.isEmpty {
-            self.ynSerach.appendSearchHistories(value: text)
-            self.SearchView.ynSearchMainView.redrawSearchHistoryButtons()
+            self.searchService.appendSearchHistories(value: text)
+            self.searchView.searchMainView.redrawSearchHistoryButtons()
+            
+            
+            self.searchService.search(query: text, completion: { results in
+                DispatchQueue.main.async {
+                    self.searchView.suggestionsListView.database = results
+                    self.searchView.suggestionsListView.searchResultDatabase = results
+                    self.searchView.suggestionsListView.reloadData()
+                }
+            })
+            
         }
-        self.SearchTextfieldView.ynSearchTextField.endEditing(true)
+        self.searchTextfieldView.searchTextField.endEditing(true)
         return true
     }
     
-    open func textFieldDidBeginEditing(_ textField: UITextField) {
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         UIView.animate(withDuration: 0.3, animations: {
-            self.SearchView.ynSearchMainView.alpha = 0
-            self.SearchTextfieldView.cancelButton.alpha = 1
-            self.SearchView.ynSearchListView.alpha = 1
+            self.searchView.searchMainView.alpha = 0
+            self.searchTextfieldView.cancelButton.alpha = 1
+            self.searchView.suggestionsListView.alpha = 1
             
         }) { (true) in
-            self.SearchView.ynSearchMainView.isHidden = true
-            self.SearchView.ynSearchListView.isHidden = false
+            self.searchView.searchMainView.isHidden = true
+            self.searchView.suggestionsListView.isHidden = false
         }
         
         
         
     }
+    
+    let searchService = SearchService.init(indexName: "blog-posts")
 }

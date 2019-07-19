@@ -8,80 +8,80 @@
 
 import UIKit
 
-open class YNSearchView: UIView, YNSearchMainViewDelegate, YNSearchListViewDelegate {
-    open var delegate: YNSearchDelegate?
+class YNSearchView: UIView, SearchMainViewDelegate, SearchListViewDelegate {
+    var delegate: SearchDelegate?
     
-    open var ynScrollView: UIScrollView!
-    open var ynSearchMainView: YNSearchMainView!
-    open var ynSearchListView: YNSearchListView!
+    var ynScrollView: UIScrollView!
+    var searchMainView: YNSearchMainView!
+    var suggestionsListView: SearchSuggestionsListView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.ynScrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         
-        self.ynSearchMainView = YNSearchMainView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        self.ynSearchMainView.delegate = self
-        self.ynScrollView.addSubview(self.ynSearchMainView)
+        self.searchMainView = YNSearchMainView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        self.searchMainView.delegate = self
+        self.ynScrollView.addSubview(self.searchMainView)
         
-        self.ynSearchListView = YNSearchListView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        self.ynSearchListView.ynSearchListViewDelegate = self
-        self.ynSearchListView.isHidden = true
+        self.suggestionsListView = SearchSuggestionsListView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+        self.suggestionsListView.searchListViewDelegate = self
+        self.suggestionsListView.isHidden = true
         
-        if let clearHistoryButton = self.ynSearchMainView.clearHistoryButton {
+        if let clearHistoryButton = self.searchMainView.clearHistoryButton {
         self.ynScrollView.contentSize = CGSize(width: self.frame.width, height: clearHistoryButton.frame.origin.y + clearHistoryButton.frame.height + 20)
         } else {
             self.ynScrollView.contentSize = CGSize(width: self.frame.width, height: self.frame.height)
         }
-        self.ynScrollView.addSubview(self.ynSearchListView)
+        self.ynScrollView.addSubview(self.suggestionsListView)
         
         self.addSubview(ynScrollView)
         
         
     }
     
-    open func ynSearchMainViewSearchHistoryChanged() {
-        let size = CGSize(width: self.frame.width, height: self.ynSearchMainView.clearHistoryButton.frame.origin.y + self.ynSearchMainView.clearHistoryButton.frame.height + 20)
+    func ynSearchMainViewSearchHistoryChanged() {
+        let size = CGSize(width: self.frame.width, height: self.searchMainView.clearHistoryButton.frame.origin.y + self.searchMainView.clearHistoryButton.frame.height + 20)
         self.ynScrollView.contentSize = size
-        self.ynSearchMainView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+        self.searchMainView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    open func scrollViewDidScroll() {
-        self.delegate?.ynSearchListViewDidScroll()
+    func scrollViewDidScroll() {
+        self.delegate?.searchListViewDidScroll()
     }
     
     // MARK: - ynSearchMainView
-    open func ynCategoryButtonClicked(text: String) {
+    func ynCategoryButtonClicked(text: String) {
         self.delegate?.ynCategoryButtonClicked(text: text)
     }
     
-    open func ynSearchHistoryButtonClicked(text: String) {
+    func ynSearchHistoryButtonClicked(text: String) {
         self.delegate?.ynSearchHistoryButtonClicked(text: text)
     }
     
-    open func ynSearchListViewClicked(key: String) {
-        self.delegate?.ynSearchListViewClicked(key: key)
+    func searchListViewClicked(key: String) {
+        self.delegate?.searchListViewClicked(key: key)
     }
     
-    open func ynSearchListViewClicked(object: Any) {
-        self.delegate?.ynSearchListViewClicked(object: object)
+    func searchListViewClicked(object: Any) {
+        self.delegate?.searchListViewClicked(object: object)
     }
     
-    open func ynSearchListView(_ ynSearchListView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.delegate?.ynSearchListView(ynSearchListView, cellForRowAt: indexPath) else { return UITableViewCell() }
+    func searchListView(_ ynSearchListView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = self.delegate?.searchListView(ynSearchListView, cellForRowAt: indexPath) else { return UITableViewCell() }
         return cell
     }
 
-    open func ynSearchListView(_ ynSearchListView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.ynSearchListView(ynSearchListView, didSelectRowAt: indexPath)
+    func searchListView(_ ynSearchListView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.searchListView(ynSearchListView, didSelectRowAt: indexPath)
     }
     
-    open func ynSearchListViewDidScroll() {
-        self.delegate?.ynSearchListViewDidScroll()
+    func searchListViewDidScroll() {
+        self.delegate?.searchListViewDidScroll()
     }
     
 
