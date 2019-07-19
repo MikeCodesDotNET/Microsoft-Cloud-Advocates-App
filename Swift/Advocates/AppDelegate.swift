@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SafariServices
+
 import AppCenter
 import AppCenterAuth
 import AppCenterData
@@ -15,8 +17,10 @@ import AppCenterCrashes
 import AppCenterAnalytics
 import AppCenterDistribute
 
+import NotificationBannerSwift
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MSPushDelegate {
 
     var window: UIWindow?
 
@@ -24,7 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        MSAppCenter.start("913e6960-3963-4760-8b50-68b551406c24", withServices: [MSDistribute.self, MSCrashes.self, MSAuth.self, MSData.self, MSPush.self, MSAnalytics.self])
+        MSPush.setDelegate(self)
+
+        MSAppCenter.start(Constants.AppCenter.apiKey, withServices: [MSDistribute.self, MSCrashes.self, MSAuth.self, MSData.self, MSPush.self, MSAnalytics.self])
 
         
         return true
@@ -51,7 +57,78 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func push(_ push: MSPush!, didReceive pushNotification: MSPushNotification!) {
+        
+        //Handle push notifications
+        let title: String = pushNotification.title ?? ""
+        var message: String = pushNotification.message ?? ""
+        var customData = pushNotification.customData
+      
+        var root = ""
+        var article = ""
+    
+        for item in pushNotification.customData {
+            
+            if item.key == "root" {
+                root = item.value
+            }
+            
+            if item.key == "article" {
+                article = item.value
+            }
+        }
+        
+        
+        if (UIApplication.shared.applicationState == .background) {
+            
+           //  NSLog("Notification received in background, title: \"\(title)\", message: \"\(message)\", custom data: \"\(customData)\"");
+            
+        } else {
+            
+           // message =  message + ((customData.isEmpty) ? "" : "\n\(customData)")
+            
+            let banner = GrowingNotificationBanner(title: title, subtitle: message, style: .info, colors: InAppBannerColours())
+            
+            //Handle banner tap
+            banner.onTap = {
+                
+                if let url = URL(string: "\(root)\(article)") {
+                    let config = SFSafariViewController.Configuration()
+                    config.entersReaderIfAvailable = true
+                    config.barCollapsingEnabled = true
+                    
+                    let vc = SFSafariViewController(url: url, configuration: config)
+                    vc.preferredBarTintColor = UIColor.black
+                    vc.preferredControlTintColor = UIColor.white
+                    
+                    let root = self.window?.rootViewController?.children.first as! UINavigationController
+                    root.present(vc, animated: true)
+                    
+                }
+                
+            }
+            banner.show()
+         
+            
+        }
+        
+    }
+    
 
+    
+
+    func setupAppearance(){
+        
+        //Tabbar
+        let tabColor = UIColor(hex: "#F6F6F6")
+        
+        UITabBar.appearance().backgroundColor = tabColor
+        UITabBar.appearance().tintColor = tabColor
+        
+        
+        
+    }
 
 }
 

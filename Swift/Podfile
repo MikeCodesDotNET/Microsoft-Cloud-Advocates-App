@@ -15,5 +15,9 @@ target 'Advocates' do
   pod 'AppCenter/Distribute'
 
 
+  pod "SkeletonView"
+  pod 'Kingfisher', '~> 5.0'
+  pod 'NotificationBannerSwift'
+  pod 'Alamofire', '~> 5.0.0-beta.5'
 
 end

@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{612B9920
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advocates.UITest", "Advocates.UITest\Advocates.UITest.csproj", "{2D80ED5D-4B03-4644-821F-12C972EDF0C3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{DBA394B7-B708-4C10-848F-E95A4D73CE88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advocates.SearchIndexPopulator", "Advocates.SearchIndexPopulator\Advocates.SearchIndexPopulator.csproj", "{34793695-6271-419C-8666-89D8B076B06E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,10 +75,23 @@ Global
 		{2D80ED5D-4B03-4644-821F-12C972EDF0C3}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{2D80ED5D-4B03-4644-821F-12C972EDF0C3}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{2D80ED5D-4B03-4644-821F-12C972EDF0C3}.Release|iPhone.Build.0 = Release|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{34793695-6271-419C-8666-89D8B076B06E}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C09A5B06-3CE0-4E94-B000-055515E83F1D} = {3BC1C997-6B5E-48F7-831C-66BEE12EFCDB}
 		{C5DD45E3-C4BB-4AD4-BA3F-754697099E08} = {3BC1C997-6B5E-48F7-831C-66BEE12EFCDB}
 		{2D80ED5D-4B03-4644-821F-12C972EDF0C3} = {612B9920-6A1C-48A8-9A94-0D507C908638}
+		{34793695-6271-419C-8666-89D8B076B06E} = {DBA394B7-B708-4C10-848F-E95A4D73CE88}
 	EndGlobalSection
 EndGlobal

@@ -88,8 +88,9 @@ namespace Advocates.iOS
                 var userInfo = content.UserInfo;
                 NSDictionary mobile_center = userInfo.ObjectForKey(new NSString("mobile_center")) as NSDictionary;
 
-                var url = mobile_center.ValueForKey(new NSString("url")).ToString();
-                await Xamarin.Essentials.Browser.OpenAsync(url);
+                var root = mobile_center.ValueForKey(new NSString("root")).ToString();
+                var article = mobile_center.ValueForKey(new NSString("article")).ToString();
+                await Xamarin.Essentials.Browser.OpenAsync($"{root}{article}");
             }
 
             completionHandler();

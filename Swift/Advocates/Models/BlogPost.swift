@@ -7,33 +7,55 @@
 //
 
 import Foundation
+import AppCenterData
 
-class BlogPost : NSObject {
+class BlogPost : NSObject, MSSerializableDocument    {
     
-    var Title : String?
-    var Description : String?
-    var IsFamilyFriendly : Bool?
-    var PrimaryImage : String?
-    var PublishedDate : NSDate?
-    var Summary : String?
-    var Url : String?
-    var ClassType : String?
-    var Identifier : String?
+    var title: String
+    var isFamilyFriendly: Bool
+    var primaryImage: PrimaryImage
+    //var summary: String
+    var url: String
+    var classType: String
+    var identifier: String
+    var source: String
     
-    required init(from dictionary: [AnyHashable : Any]) {
-        //sdk turns dictionary to concrete Swift class
-        self.Title = dictionary["title"] as? String
-        self.Description = dictionary["description"] as? String
-        self.IsFamilyFriendly = dictionary["isFamilyFriendly"] as? Bool
-        self.PrimaryImage = dictionary["primaryImage"] as? String
-        self.Summary = dictionary["summary"] as? String
-        self.Url = dictionary["url"] as? String
-        self.ClassType = dictionary["classType"] as? String
-        self.Identifier = dictionary["identifier"] as? String
-
-        
+    required public init(from dictionary: [AnyHashable : Any]) {
+        self.title = dictionary["title"] as! String
+        self.isFamilyFriendly = dictionary["isFamilyFriendly"] as! Bool
+        self.primaryImage = PrimaryImage.init(from: dictionary["primaryImage"] as! [AnyHashable : Any] )
+        //self.summary = dictionary["summary"] as! String
+        self.url = dictionary["url"] as! String
+        self.classType = dictionary["classType"] as! String
+        self.identifier = dictionary["identifier"] as! String
+        self.source = dictionary["source"] as! String
 
     }
     
    
+    public func serializeToDictionary() -> [AnyHashable : Any] {
+        return ["title": self.title,
+                "isFamilyFriendly": self.isFamilyFriendly,
+                "primaryImage": self.primaryImage,
+                //"summary": self.summary,
+                "url": self.url,
+                "classType": self.classType,
+                "identifier": self.identifier,
+                "source": self.source]
+    }
+
+}
+
+class PrimaryImage : NSObject, MSSerializableDocument {
+    
+    let contentUrl: String
+    
+    required public init(from dictionary: [AnyHashable : Any]) {
+         self.contentUrl = dictionary["contentUrl"] as! String
+    }
+    
+    public func serializeToDictionary() -> [AnyHashable : Any] {
+        return ["contentUrl": self.contentUrl]
+    }
+    
 }

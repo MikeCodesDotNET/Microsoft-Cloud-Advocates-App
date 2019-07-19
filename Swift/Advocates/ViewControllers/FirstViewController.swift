@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AppCenterData
 
 class FirstViewController: UIViewController {
 
@@ -15,6 +16,21 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    
+    func refresh()
+    {
+        MSData.listDocuments(withType: BlogPost.self, partition: kMSDataUserDocumentsPartition, completionHandler: { documents in
+            
+            for document in documents.currentPage().items {
+                var fetchedDocument: BlogPost
+                fetchedDocument = document.deserializedValue as! BlogPost
+                
+                //We have the headline here.
+                
+            }
+            
+        })
+    }
     
 
 }
