@@ -5,9 +5,10 @@
 [![Build status](https://build.appcenter.ms/v0.1/apps/114ff4ef-dadc-4a4d-a61f-2a5a40919127/branches/master/badge)](https://appcenter.ms)
 
 
-#Important News! 
+# Important News! 
 App Center MBaaS will not be maturing out of preview. You can read more about this [here](https://devblogs.microsoft.com/appcenter/app-center-mbaas-retirement/)
 
+---
 This application is designed to demonstrate how to build Xamarin.Forms 4.x mobile apps targeting both iOS and Android. 
 
 The app is powered by Visual Studio App Center which provides Build, UI Testing, Distribution, Crash and Analytics reporting as well as Authentication and Data Storage. 
